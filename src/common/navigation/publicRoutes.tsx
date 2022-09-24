@@ -8,7 +8,10 @@ interface PublicRoutesProps {
 
 export function PublicRoutes({Stack}: PropsWithChildren<PublicRoutesProps>) {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Stack.Screen name="Splash" component={Splash} />
     </Stack.Navigator>
   );
