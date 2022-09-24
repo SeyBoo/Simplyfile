@@ -6,7 +6,7 @@ import Navigation from './common/navigation';
 const App = () => {
   return (
     <NativeBaseProvider>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <Navigation />
     </NativeBaseProvider>
   );
