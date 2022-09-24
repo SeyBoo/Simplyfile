@@ -45,7 +45,8 @@ export function Splash({navigation}: SplashProps) {
               width="50%"
               _pressed={{
                 opacity: '.9',
-              }}>
+              }}
+              onPress={() => navigation.navigate('Register')}>
               <Text fontWeight="bold" fontSize="xl" px={4} py={2}>
                 Register
               </Text>
@@ -56,7 +57,8 @@ export function Splash({navigation}: SplashProps) {
               width="50%"
               _pressed={{
                 opacity: '.2',
-              }}>
+              }}
+              onPress={() => navigation.navigate('Login')}>
               <Text fontWeight="bold" fontSize="xl" color="white" px={4} py={2}>
                 Login
               </Text>
