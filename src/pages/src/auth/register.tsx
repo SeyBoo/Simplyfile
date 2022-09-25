@@ -135,6 +135,19 @@ export function Register({navigation}: RegisterProps) {
             </Box>
           </KeyboardAvoidingView>
           <Button
+            background="#F4F4F4"
+            _pressed={{
+              opacity: '.5',
+            }}
+            mt={8}
+            py={4}
+            borderRadius="lg"
+            width="100%">
+            <Text fontSize="xl" fontWeight={500} textAlign="center">
+              Register
+            </Text>
+          </Button>
+          <Button
             textAlign="center"
             mt="8"
             onPress={() => navigation.navigate('Login')}
