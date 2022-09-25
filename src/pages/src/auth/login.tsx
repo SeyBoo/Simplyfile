@@ -86,21 +86,21 @@ export function Login({navigation}: LoginProps) {
                     type="password"
                 />
               </Box>
-              <Box mt="5">
-                <Button
-                    alignSelf="flex-end"
-                    mr={4}
-                    mt={2}
-                    fontSize="sm"
-                    p={0}
-                    background="transparent"
-                    _pressed={{
-                      opacity: '.5',
-                    }}
-                    onPress={() => navigation.navigate('Reset')}>
-                  <Text color="#4D4D4D">Forgot Password ?</Text>
-                </Button>
-              </Box>
+              {/*<Box mt="5">*/}
+              {/*  <Button*/}
+              {/*      alignSelf="flex-end"*/}
+              {/*      mr={4}*/}
+              {/*      mt={2}*/}
+              {/*      fontSize="sm"*/}
+              {/*      p={0}*/}
+              {/*      background="transparent"*/}
+              {/*      _pressed={{*/}
+              {/*        opacity: '.5',*/}
+              {/*      }}*/}
+              {/*      onPress={() => navigation.navigate('Reset')}>*/}
+              {/*    <Text color="#4D4D4D">Forgot Password ?</Text>*/}
+              {/*  </Button>*/}
+              {/*</Box>*/}
               <Button
                   background="#F4F4F4"
                   _pressed={{
