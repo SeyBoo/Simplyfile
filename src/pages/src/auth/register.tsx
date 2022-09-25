@@ -4,6 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {signUpWithEmailPassword} from "../../../modules/auth/store/thunks";
 import {InvalidUsernameOrPassword} from "../../../modules/auth/api/error";
 import {useAppDispatch} from "../../../common/hooks/store";
+import FormControl from "../../../common/components/formControl";
 
 interface RegisterProps {
   navigation: any;
@@ -69,82 +70,29 @@ export function Register({navigation}: RegisterProps) {
               </Box>
             </Box>
             <KeyboardAvoidingView>
-              <Box mt="10">
-                <Text fontSize="xl" mb="2">
-                  Email
-                </Text>
-                <Input
-                    mx="3"
-                    placeholder="Enter your email"
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    fontSize="md"
-                    fontWeight="light"
-                    borderRadius="lg"
-                    ml="0"
-                    p={6}
-                    borderColor="gray.300"
-                    onChangeText={text => setEmail(text)}
+              <Box mt={2.5}>
+                <FormControl
+                    required
+                    label="Email"
+                    placeholder={"Enter your email"}
+                    onChange={(text) => setEmail(text)}
+                    error={error}
                 />
-              </Box>
-              <Box mt="5">
-                <Text fontSize="xl" mb="2">
-                  Password
-                </Text>
-                <Input
-                    mx="3"
-                    placeholder="Enter your Password"
-                    fontSize="md"
-                    fontWeight="light"
-                    borderColor="gray.300"
-                    borderRadius="lg"
-                    type={show ? 'text' : 'password'}
-                    InputRightElement={
-                      <Icon
-                          as={
-                            <MaterialIcons
-                                name={show ? 'visibility' : 'visibility-off'}
-                            />
-                          }
-                          size={5}
-                          mr="2"
-                          color="muted.400"
-                          onPress={() => setShow(!show)}
-                      />
-                    }
-                    ml="0"
-                    p={6}
-                    onChangeText={text => setPassword(text)}
+                <FormControl
+                    required
+                    label="Password"
+                    placeholder={"Enter your password"}
+                    onChange={(text) => setPassword(text)}
+                    error={error}
+                    type="password"
                 />
-              </Box>
-              <Box mt="5">
-                <Text fontSize="xl" mb="2">
-                  Confirm Password
-                </Text>
-                <Input
-                    mx="3"
-                    placeholder="Confirm your Password"
-                    fontSize="md"
-                    fontWeight="light"
-                    borderColor="gray.300"
-                    borderRadius="lg"
-                    ml="0"
-                    type={showConfirm ? 'text' : 'password'}
-                    onChangeText={text => setPasswordConfirm(text)}
-                    InputRightElement={
-                      <Icon
-                          as={
-                            <MaterialIcons
-                                name={showConfirm ? 'visibility' : 'visibility-off'}
-                            />
-                          }
-                          size={5}
-                          mr="2"
-                          color="muted.400"
-                          onPress={() => setshowConfirm(!showConfirm)}
-                      />
-                    }
-                    p={6}
+                <FormControl
+                    required
+                    label="Confirm password"
+                    placeholder={"Confirm your password"}
+                    onChange={(text) => setPasswordConfirm(text)}
+                    error={error}
+                    type="password"
                 />
               </Box>
             </KeyboardAvoidingView>

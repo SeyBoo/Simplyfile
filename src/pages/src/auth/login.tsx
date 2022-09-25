@@ -4,6 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useAppDispatch} from "../../../common/hooks/store";
 import {InvalidUsernameOrPassword} from "../../../modules/auth/api/error";
 import {loginWithEmailPassword} from "../../../modules/auth/store/thunks";
+import FormControl from "../../../common/components/formControl";
 
 interface LoginProps {
   navigation: any;
@@ -61,53 +62,23 @@ export function Login({navigation}: LoginProps) {
                   </Text>
                 </Box>
               </Box>
-              <Box mt="10">
-                <Text fontSize="xl" mb="2">
-                  Email
-                </Text>
-                <Input
-                    mx="3"
+              <Box mt="7.5">
+                <FormControl
+                    label="Email"
+                    onChange={(text) => setEmail(text)}
+                    required
                     placeholder="Enter your email"
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    fontSize="md"
-                    fontWeight="light"
-                    borderRadius="lg"
-                    ml="0"
-                    p={6}
-                    borderColor="gray.300"
-                    onChangeText={text => setEmail(text)}
+                />
+                <FormControl
+                    label="Password"
+                    onChange={(text) => setPassword(text)}
+                    required
+                    error={error}
+                    placeholder="Enter your password"
+                    type="password"
                 />
               </Box>
               <Box mt="5">
-                <Text fontSize="xl" mb="2">
-                  Password
-                </Text>
-                <Input
-                    onChangeText={text => setPassword(text)}
-                    mx="3"
-                    placeholder="Enter your Password"
-                    fontSize="md"
-                    fontWeight="light"
-                    borderColor="gray.300"
-                    borderRadius="lg"
-                    ml="0"
-                    type={show ? 'text' : 'password'}
-                    InputRightElement={
-                      <Icon
-                          as={
-                            <MaterialIcons
-                                name={show ? 'visibility' : 'visibility-off'}
-                            />
-                          }
-                          size={5}
-                          mr="2"
-                          color="muted.400"
-                          onPress={() => setShow(!show)}
-                      />
-                    }
-                    p={6}
-                />
                 <Button
                     alignSelf="flex-end"
                     mr={4}

@@ -14,7 +14,6 @@ export const signUpWithEmailPassword = (email: string, password: string): AppThu
     async (dispatch) => {
       const auth = await getAuthBackend();
       const userInfo = await auth.signUpWithEmailPassword(email, password);
-      console.log(userInfo);
       await dispatch(setUser({user: userInfo}))
     }
 )
