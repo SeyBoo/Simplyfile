@@ -72,7 +72,7 @@ const FormControl: FunctionComponent<FormControlProps> = (
         </Box>
 
         {error &&
-            <Text fontSize="xl" mb="2" color={"red.500"}>
+            <Text fontSize="md" mt="2" color={"red.500"}>
               {error}
             </Text>
         }
