@@ -12,7 +12,6 @@ let authBackendInstance: AuthBackend | undefined = undefined;
 
 export async function getAuthBackend(): Promise<AuthBackend> {
   if (authBackendInstance === undefined) {
-    console.log('test' + API);
     const mod = await import ('./backends/' + NEXT_PUBLIC_AUTH_API_BACKEND_MODULE);
     authBackendInstance = new mod.default() as AuthBackend;
   }
