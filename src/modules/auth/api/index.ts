@@ -6,6 +6,8 @@ const API = process.env.NEXT_PUBLIC_AUTH_API_BACKEND_MODULE;
 
 export interface AuthBackend {
   loginWithEmailPassword(email: string, password: string): Promise<UserInfo>;
+
+  signUpWithEmailPassword(email: string, password: string): Promise<UserInfo>;
 }
 
 let authBackendInstance: AuthBackend | undefined = undefined;
