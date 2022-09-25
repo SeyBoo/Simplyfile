@@ -32,6 +32,14 @@ export function Login({navigation}: LoginProps) {
     }
   }, [dispatch, email, password]);
 
+
+  const getPasswordError = useCallback(() => {
+    switch (error) {
+      case 'IUP':
+        return 'Invalid email or password'
+    }
+  }, [error]);
+
   return (
       <ScrollView backgroundColor="#F6F6F6">
         <KeyboardAvoidingView>
@@ -73,7 +81,7 @@ export function Login({navigation}: LoginProps) {
                     label="Password"
                     onChange={(text) => setPassword(text)}
                     required
-                    error={error}
+                    error={getPasswordError()}
                     placeholder="Enter your password"
                     type="password"
                 />

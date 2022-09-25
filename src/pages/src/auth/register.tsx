@@ -39,6 +39,15 @@ export function Register({navigation}: RegisterProps) {
 
   }, [dispatch, email, password, passwordConfirm]);
 
+  const getPasswordError = useCallback(() => {
+    switch (error) {
+      case 'IUP':
+        return 'Invalid email or password'
+      case 'NMP':
+        return "Password doesn't match"
+    }
+  }, [error]);
+
   return (
       <ScrollView background="#F6F6F6">
         <Box mt={12}>
@@ -76,14 +85,12 @@ export function Register({navigation}: RegisterProps) {
                     label="Email"
                     placeholder={"Enter your email"}
                     onChange={(text) => setEmail(text)}
-                    error={error}
                 />
                 <FormControl
                     required
                     label="Password"
                     placeholder={"Enter your password"}
                     onChange={(text) => setPassword(text)}
-                    error={error}
                     type="password"
                 />
                 <FormControl
@@ -91,7 +98,7 @@ export function Register({navigation}: RegisterProps) {
                     label="Confirm password"
                     placeholder={"Confirm your password"}
                     onChange={(text) => setPasswordConfirm(text)}
-                    error={error}
+                    error={getPasswordError()}
                     type="password"
                 />
               </Box>
