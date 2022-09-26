@@ -13,8 +13,6 @@ interface RegisterProps {
 type Error = 'IUP' | 'NMP' | null;
 
 export function Register({navigation}: RegisterProps) {
-  const [show, setShow] = useState<boolean>(false);
-  const [showConfirm, setshowConfirm] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
   const [email, setEmail] = useState<string>('');
