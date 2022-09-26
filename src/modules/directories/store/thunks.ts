@@ -18,3 +18,11 @@ export const createDirectory = (name: string): AppThunk => (
       await dispatch(addNewDirectory({directory}))
     }
 )
+
+export const updateDirectory = (uuid: string, name: string): AppThunk => (
+    async (dispatch) => {
+      const directoryBackend = await getDirectoriesBackend();
+      const directories = await directoryBackend.updateDirectory(uuid, name);
+      await dispatch(setDirectories({directories}))
+    }
+)

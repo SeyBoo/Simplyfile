@@ -19,8 +19,8 @@ const DirectoriesSlice = createSlice({
     },
     addNewDirectory: (state, action: PayloadAction<AddNewDirectoryPayload>) => {
       if (state.directories !== null)
-      state.directories.push(action.payload.directory)
-    }
+        state.directories.push(action.payload.directory)
+    },
   }
 });
 

@@ -6,6 +6,8 @@ export interface DirectoriesBackend {
   fetchDirectories() : Promise<Directory[]>;
 
   createDirectory(name: string): Promise<Directory>;
+
+  updateDirectory(uuid: string, name: string): Promise<Directory[]>;
 }
 
 let authBackendInstance: DirectoriesBackend | undefined = undefined;

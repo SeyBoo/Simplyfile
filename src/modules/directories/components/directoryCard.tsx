@@ -1,6 +1,9 @@
 import * as React from 'react';
 import {Box, Button, HStack, Image, Text,} from 'native-base';
+import {ActionSheetIOS, Alert, Platform,} from 'react-native';
 import FolderIcon from '../../../common/assets/icon/folder.png';
+import {updateDirectory} from "../store/thunks";
+import {useAppDispatch} from "../../../common/hooks/store";
 
 interface DirectoryProps {
   name: string;
@@ -13,6 +16,51 @@ const DirectoryCard = (
       uuid,
     }: DirectoryProps
 ) => {
+  const dispatch = useAppDispatch();
+  
+  const handleRenameModal = () => {
+    if (Platform.OS === 'ios') {
+      Alert.prompt(
+          `Update ${name}`,
+          '',
+          [
+            {text: 'Cancel', style: 'cancel'},
+            {
+              text: 'Update',
+              onPress: (text) => {
+                if (text) {
+                  (async () => (
+                      await dispatch(updateDirectory(uuid, text))
+                  ))()
+                }
+              }
+            },
+          ],
+          'plain-text'
+      );
+    }
+    // TODO Android
+  };
+
+  const handleLongPress = () => {
+    if (Platform.OS === 'ios') {
+      ActionSheetIOS.showActionSheetWithOptions(
+          {
+            options: ['Cancel', 'Rename'],
+            destructiveButtonIndex: 2,
+            cancelButtonIndex: 0,
+            userInterfaceStyle: 'dark',
+          },
+          (buttonIndex) => {
+            if (buttonIndex === 1) {
+              handleRenameModal();
+            } 
+          },
+      );
+    }
+    //TODO Android
+  };
+
   return (
       <Button
           background="transparent"
@@ -20,7 +68,7 @@ const DirectoryCard = (
           _pressed={{
             opacity: .5,
           }}
-          onLongPress={() => null}
+          onLongPress={() => handleLongPress()}
           onPress={() => null}
       >
         <HStack
