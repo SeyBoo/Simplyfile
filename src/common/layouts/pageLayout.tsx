@@ -5,7 +5,7 @@ import {Box, ScrollView, Text, VStack,} from 'native-base';
 interface PageLayoutInterface {
   title: string,
   subtitle?: string,
-  children?: Element[]
+  children?: Element[] | Element,
 }
 
 const PageLayout: React.FC<PageLayoutInterface> = (
