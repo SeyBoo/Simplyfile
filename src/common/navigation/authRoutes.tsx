@@ -1,15 +1,36 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Image} from 'native-base';
+import HomeActive from '../assets/bottom-tabs/active/home.png';
+import HomeInActive from '../assets/bottom-tabs/inactive/home.png';
 import {Home} from '../../pages';
 
-interface AuthRoutesProps {
-  Stack: createNativeStackNavigator;
-}
+export function AuthRoutes() {
+  const Tab = createBottomTabNavigator();
 
-export function AuthRoutes({Stack}: PropsWithChildren<AuthRoutesProps>) {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-    </Stack.Navigator>
+      <Tab.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarStyle: {
+              height: 100,
+            },
+          }}
+      >
+        <Tab.Screen
+            name="Home"
+            component={Home}
+            options={{
+              tabBarIcon: ({focused}) => (
+                  focused
+                      ? <Image source={HomeActive} alt={"home active"}/>
+                      : <Image source={HomeInActive} alt={"home inactive"}/>
+              ),
+              headerShown: false,
+            }}
+        />
+      </Tab.Navigator>
   );
 }
