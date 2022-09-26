@@ -4,6 +4,8 @@ const DIRECTORIES_API_BACKEND_MODULE = 'dummy';
 
 export interface DirectoriesBackend {
   fetchDirectories() : Promise<Directory[]>;
+
+  createDirectory(name: string): Promise<Directory>;
 }
 
 let authBackendInstance: DirectoriesBackend | undefined = undefined;
