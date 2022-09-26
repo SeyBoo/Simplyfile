@@ -1,6 +1,6 @@
 import {AppThunk} from "../../../common/store";
 import {getDirectoriesBackend} from "../api";
-import {setDirectories} from "./slice";
+import {setDirectories, addNewDirectory} from "./slice";
 
 export const fetchDirectories =
     (): AppThunk => (
@@ -9,4 +9,12 @@ export const fetchDirectories =
           const directories = await directory.fetchDirectories();
           await dispatch(setDirectories({directories}))
         }
-    )
+    );
+
+export const createDirectory = (name: string): AppThunk => (
+    async (dispatch) => {
+      const directoryBackend = await getDirectoriesBackend();
+      const directory = await directoryBackend.createDirectory(name)
+      await dispatch(addNewDirectory({directory}))
+    }
+)

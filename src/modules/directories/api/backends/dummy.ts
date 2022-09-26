@@ -8,4 +8,18 @@ export default class DummyDirectories implements DirectoriesBackend {
   async fetchDirectories(): Promise<Directory[]> {
     return directories;
   }
+
+  async createDirectory(name: string): Promise<Directory> {
+    const formattedNewDirectory = {
+      name,
+      uuid: name,
+    }
+
+    directories = [
+      ...directories,
+      formattedNewDirectory
+    ];
+
+    return formattedNewDirectory;
+  }
 }

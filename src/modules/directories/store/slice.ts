@@ -6,15 +6,23 @@ interface SetDirectoriesPayload {
   directories: Directory[];
 }
 
+interface AddNewDirectoryPayload {
+  directory: Directory;
+}
+
 const DirectoriesSlice = createSlice({
   name: "directories",
   initialState,
   reducers: {
     setDirectories: (state, action: PayloadAction<SetDirectoriesPayload>) => {
       state.directories = action.payload.directories;
+    },
+    addNewDirectory: (state, action: PayloadAction<AddNewDirectoryPayload>) => {
+      if (state.directories !== null)
+      state.directories.push(action.payload.directory)
     }
   }
 });
 
-export const {setDirectories} = DirectoriesSlice.actions;
+export const {setDirectories, addNewDirectory} = DirectoriesSlice.actions;
 export default DirectoriesSlice;
