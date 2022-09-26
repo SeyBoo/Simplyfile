@@ -39,4 +39,12 @@ export default class DummyDirectories implements DirectoriesBackend {
 
     return directories;
   }
+
+  async removeDirectory(uuid: string): Promise<Directory[]> {
+    const newArray = directories.filter(directory => directory.uuid != uuid)
+
+    directories = newArray;
+
+    return newArray;
+  }
 }

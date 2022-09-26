@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Box, Button, HStack, Image, Text,} from 'native-base';
 import {ActionSheetIOS, Alert, Platform,} from 'react-native';
 import FolderIcon from '../../../common/assets/icon/folder.png';
-import {updateDirectory} from "../store/thunks";
+import {removeDirectory, updateDirectory} from "../store/thunks";
 import {useAppDispatch} from "../../../common/hooks/store";
 
 interface DirectoryProps {
@@ -17,7 +17,7 @@ const DirectoryCard = (
     }: DirectoryProps
 ) => {
   const dispatch = useAppDispatch();
-  
+
   const handleRenameModal = () => {
     if (Platform.OS === 'ios') {
       Alert.prompt(
@@ -46,7 +46,7 @@ const DirectoryCard = (
     if (Platform.OS === 'ios') {
       ActionSheetIOS.showActionSheetWithOptions(
           {
-            options: ['Cancel', 'Rename'],
+            options: ['Cancel', 'Rename', 'Delete'],
             destructiveButtonIndex: 2,
             cancelButtonIndex: 0,
             userInterfaceStyle: 'dark',
@@ -54,7 +54,11 @@ const DirectoryCard = (
           (buttonIndex) => {
             if (buttonIndex === 1) {
               handleRenameModal();
-            } 
+            } else if (buttonIndex === 2) {
+              (async () => (
+                  await dispatch(removeDirectory(uuid))
+              ))()
+            }
           },
       );
     }
