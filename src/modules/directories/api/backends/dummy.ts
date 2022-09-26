@@ -22,4 +22,29 @@ export default class DummyDirectories implements DirectoriesBackend {
 
     return formattedNewDirectory;
   }
+
+  async updateDirectory(uuid: string, name: string): Promise<Directory[]> {
+    const updatedDirectories = directories.map(directory => {
+      if (directory.uuid === uuid) {
+        return {
+          name: name,
+          uuid: uuid,
+        }
+      }
+
+      return directory;
+    });
+
+    directories = updatedDirectories;
+
+    return directories;
+  }
+
+  async removeDirectory(uuid: string): Promise<Directory[]> {
+    const newArray = directories.filter(directory => directory.uuid != uuid)
+
+    directories = newArray;
+
+    return newArray;
+  }
 }
