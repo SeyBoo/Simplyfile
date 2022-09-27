@@ -38,7 +38,7 @@ export const Directory: FunctionComponent<NativeStackScreenProps<AuthStackParamL
 
   return (
       <PageLayout title={directory.metadata.name} subtitle="directory">
-        <DocumentsList documents={directory.documents}/>
+        <DocumentsList documents={directory.documents} handleFetchDirectory={handleFetchDirectory}/>
       </PageLayout>
   );
 };

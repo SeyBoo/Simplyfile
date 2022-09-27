@@ -1,14 +1,17 @@
 import {FunctionComponent} from "react";
 import {Document} from "../../../common/types/documents.interface";
-import {Box, Button, HStack, Image, Text, Card, Icon} from "native-base";
+import {Box, Button, Card, HStack, Icon, Image, Text} from "native-base";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import moment from 'moment';
 import {ActionSheetIOS, Alert, Platform} from "react-native";
-import {removeDirectory, updateDirectory} from "../store/thunks";
+import {updateDocumentName} from "../store/thunks";
 import {useNavigation} from "@react-navigation/native";
+import {useAppDispatch} from "../../../common/hooks/store";
+import {setDocument} from "../store/slice";
 
 interface DocumentCardProps {
   document: Document;
+  handleFetchDirectory: () => Promise<void>;
 }
 
 type Nav = {
@@ -18,10 +21,60 @@ type Nav = {
 const DocumentCard: FunctionComponent<DocumentCardProps> = (
     {
       document,
+      handleFetchDirectory,
     }
 ) => {
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<Nav>();
-  const {uuid, directory } = document
+  const {uuid, directory} = document
+
+  const handleRename = async (text: string) => {
+    await dispatch(updateDocumentName(uuid, directory, text));
+    await handleFetchDirectory();
+  }
+
+  const handleRenameModal = () => {
+    if (Platform.OS === 'ios') {
+      Alert.prompt(
+          `Update ${document.name}`,
+          '',
+          [
+            {text: 'Cancel', style: 'cancel'},
+            {
+              text: 'Update',
+              onPress: text => {
+                if (text) {
+                  (async () => handleRename(text))();
+                }
+              },
+            },
+          ],
+          'plain-text',
+      );
+    }
+    // TODO Android
+  };
+
+  const handleLongPress = () => {
+    if (Platform.OS === 'ios') {
+      ActionSheetIOS.showActionSheetWithOptions(
+          {
+            options: ['Cancel', 'Rename', 'Delete'],
+            destructiveButtonIndex: 2,
+            cancelButtonIndex: 0,
+            userInterfaceStyle: 'dark',
+          },
+          buttonIndex => {
+            if (buttonIndex === 1) {
+              handleRenameModal();
+            } else if (buttonIndex === 2) {
+              (async () => handleDelete())();
+            }
+          },
+      );
+    }
+    //TODO Android
+  }
 
   return (
       <Button
@@ -31,6 +84,7 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = (
             opacity: .5
           }}
           onPress={() => navigation.navigate('Document', {uuid, directoryUuid: directory})}
+          onLongPress={() => handleLongPress()}
       >
         <Card
             width="200px"
@@ -73,7 +127,8 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = (
                     opacity: .5
                   }}
               >
-                <Icon size="6" color="black" as={<MaterialIcons name={document.bookmarked ? 'bookmark' : 'bookmark-border'}/>}/>
+                <Icon size="6" color="black"
+                      as={<MaterialIcons name={document.bookmarked ? 'bookmark' : 'bookmark-border'}/>}/>
               </Button>
             </HStack>
           </Box>

@@ -5,11 +5,13 @@ import {HStack} from "native-base";
 
 interface DocumentsListProps {
   documents: Document[] | null;
+  handleFetchDirectory: () => Promise<void>;
 }
 
 const DocumentsList: FunctionComponent<DocumentsListProps> = (
     {
-        documents,
+      documents,
+      handleFetchDirectory,
     }
 ) => {
 
@@ -17,7 +19,7 @@ const DocumentsList: FunctionComponent<DocumentsListProps> = (
 
   return (
       <HStack flexWrap="wrap" ml="-4" pb="30%">
-        {documents.map(document => <DocumentCard document={document} key={document.uuid} />)}
+        {documents.map(document => <DocumentCard document={document} key={document.uuid} handleFetchDirectory={handleFetchDirectory}/>)}
       </HStack>
   )
 }
