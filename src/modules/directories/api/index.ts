@@ -15,6 +15,8 @@ export interface DirectoriesBackend {
   fetchDirectory(uuid: string): Promise<Directory>;
 
   fetchDocument(uuid: string, dossierUuid: string): Promise<Document>;
+
+  deleteDocument(uuid: string, dossierUuid: string): Promise<void>;
 }
 
 let authBackendInstance: DirectoriesBackend | undefined;

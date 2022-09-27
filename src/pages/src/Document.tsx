@@ -3,6 +3,7 @@ import {Box, Button, Center, HStack, Image, Input, ScrollView, Spinner, Text} fr
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {AuthStackParamList} from "../../common/navigation/authRoutes";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/store";
+import {deleteDocument, fetchDocument} from '../../modules/directories/store/thunks';
 import ArrowBack from '../../common/assets/icon/arrow-square-left.png';
 import ExportIcon from '../../common/assets/icon/export.png';
 import TrashIcon from '../../common/assets/icon/trash.png';
@@ -17,6 +18,15 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
   const dispatch = useAppDispatch();
   const document = useAppSelector(state => state.directories.document);
   const navigation = useNavigation();
+
+  const handleDeleteDocument = async () => {
+    try {
+      await dispatch(deleteDocument(uuid, directoryUuid));
+      navigation.goBack();
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   useEffect(() => {
     (async () => {
@@ -65,6 +75,7 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
                 _pressed={{
                   opacity: .5
                 }}
+                onPress={() => handleDeleteDocument()}
             >
               <Image
                   source={TrashIcon}

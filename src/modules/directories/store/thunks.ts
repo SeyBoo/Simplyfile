@@ -1,6 +1,6 @@
 import {AppThunk} from '../../../common/store';
 import {getDirectoriesBackend} from '../api';
-import {addNewDirectory, setDirectories, setDirectory, setDocument} from './slice';
+import {addNewDirectory, resetDocument, setDirectories, setDirectory, setDocument} from './slice';
 
 export const fetchDirectories = (): AppThunk => async dispatch => {
   const directoryBackend = await getDirectoriesBackend();
@@ -47,3 +47,9 @@ export const fetchDocument = (uuid: string, dossierUuid: string): AppThunk =>
       await dispatch(setDocument({document}));
     }
 
+export const deleteDocument = (uuid: string, dossierUuid: string): AppThunk =>
+    async (dispatch) => {
+      const backendInstance = await getDirectoriesBackend();
+      await backendInstance.deleteDocument(uuid, dossierUuid);
+      await dispatch(resetDocument());
+    }
