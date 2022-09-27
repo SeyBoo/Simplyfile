@@ -15,19 +15,18 @@ const userSlice = createSlice({
       const user = action.payload.user;
       state.userInfo = user;
       (async () => {
-            try {
-              const parsedValue = JSON.stringify(user);
-              AsyncStorage.setItem(UserInfoLocalStorageName, parsedValue);
-            } catch (e) {
-              console.log(e);
-            }
-          }
-      )()
+        try {
+          const parsedValue = JSON.stringify(user);
+          AsyncStorage.setItem(UserInfoLocalStorageName, parsedValue);
+        } catch (e) {
+          console.log(e);
+        }
+      })();
     },
-    resetUser: (state) => {
+    resetUser: state => {
       state.userInfo = null;
     },
-  }
+  },
 });
 
 export const {setUser, resetUser} = userSlice.actions;

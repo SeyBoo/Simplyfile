@@ -11,17 +11,16 @@ interface UserState {
 
 let userInfo: User = null;
 (async () => {
-      try {
-        let value = await AsyncStorage.getItem(UserInfoLocalStorageName);
-        if (value) {
-          const formatedUser: User = JSON.parse(value)
-          userInfo = formatedUser;
-        }
-      } catch (e) {
-        console.log(e);
-      }
+  try {
+    let value = await AsyncStorage.getItem(UserInfoLocalStorageName);
+    if (value) {
+      const formatedUser: User = JSON.parse(value);
+      userInfo = formatedUser;
     }
-)()
+  } catch (e) {
+    console.log(e);
+  }
+})();
 
 const initialState: UserState = {
   userInfo,

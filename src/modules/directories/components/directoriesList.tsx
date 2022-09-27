@@ -1,42 +1,34 @@
-import {HStack, ScrollView} from "native-base";
-import AddDirectory from "./addDirectory";
-import DirectoryCard from "./directoryCard";
-import React, {useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../../../common/hooks/store";
-import {fetchDirectories} from "../store/thunks";
+import {HStack, ScrollView} from 'native-base';
+import AddDirectory from './addDirectory';
+import DirectoryCard from './directoryCard';
+import React, {FunctionComponent} from 'react';
+import {Directory} from '../../../common/types/directory.interface';
 
-export default function DirectoriesList() {
-  const dispatch = useAppDispatch();
-  const directories = useAppSelector(state => state.directories.directories);
+interface DirectoryListProps {
+  directories: Directory[] | null;
+}
 
-  useEffect(() => {
-    if (directories === null) {
-      (async () => {
-        try {
-          await dispatch(fetchDirectories());
-        } catch (e) {
-          console.log(e)
-        }
-      })()
-    }
-  }, [directories])
+const DirectoriesList: FunctionComponent<DirectoryListProps> = ({
+  directories,
+}) => {
+  if (directories === null) {
+    return null;
+  }
 
   return (
-      <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          mt={5}
-      >
-        <HStack>
-          <AddDirectory/>
-          {directories?.map(directory =>
-              <DirectoryCard
-                  name={directory.name}
-                  key={directory.uuid}
-                  uuid={directory.uuid}
-              />
-          )}
-        </HStack>
-      </ScrollView>
-  )
-}
+    <ScrollView horizontal showsHorizontalScrollIndicator={false} mt={5}>
+      <HStack>
+        <AddDirectory />
+        {directories?.map(directory => (
+          <DirectoryCard
+            name={directory.name}
+            key={directory.uuid}
+            uuid={directory.uuid}
+          />
+        ))}
+      </HStack>
+    </ScrollView>
+  );
+};
+
+export default DirectoriesList;

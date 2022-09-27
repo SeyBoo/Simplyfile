@@ -1,12 +1,16 @@
-import {Directory} from "../../../common/types/directory.interface";
+import {
+  Directory,
+  DirectoryMetadata,
+} from '../../../common/types/directory.interface';
 
 interface DirectoriesState {
-  directories: Directory[] | null;
+  directories: DirectoryMetadata[] | null;
+  currentDirectory: Directory | null;
 }
 
-const initialState: DirectoriesState =
-{
-  directories: null
+const initialState: DirectoriesState = {
+  directories: null,
+  currentDirectory: null,
 };
 
 export default initialState;
