@@ -4,7 +4,7 @@ import {Box, Button, Card, HStack, Icon, Image, Text} from "native-base";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import moment from 'moment';
 import {ActionSheetIOS, Alert, Platform} from "react-native";
-import {updateDocumentName} from "../store/thunks";
+import {deleteDocument, updateDocumentName} from "../store/thunks";
 import {useNavigation} from "@react-navigation/native";
 import {useAppDispatch} from "../../../common/hooks/store";
 import {setDocument} from "../store/slice";
@@ -30,6 +30,11 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = (
 
   const handleRename = async (text: string) => {
     await dispatch(updateDocumentName(uuid, directory, text));
+    await handleFetchDirectory();
+  }
+
+  const handleDelete = async () => {
+    await dispatch(deleteDocument(uuid, directory));
     await handleFetchDirectory();
   }
 
