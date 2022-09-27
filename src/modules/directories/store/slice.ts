@@ -1,6 +1,6 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import initialState from "./state";
-import {Directory} from "../../../common/types/directory.interface";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import initialState from './state';
+import {Directory} from '../../../common/types/directory.interface';
 
 interface SetDirectoriesPayload {
   directories: Directory[];
