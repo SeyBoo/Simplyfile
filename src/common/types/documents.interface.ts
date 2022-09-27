@@ -1,6 +1,8 @@
 export interface Document {
+  uuid: string;
   name: string;
-  url: string;
-  creationDate: string;
+  image: string;
+  creationDate: Date;
   directory: string;
+  bookmarked: boolean;
 }
