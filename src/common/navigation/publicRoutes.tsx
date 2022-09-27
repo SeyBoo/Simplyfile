@@ -1,12 +1,15 @@
-import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {FunctionComponent} from 'react';
 import {Splash, Register, Login} from '../../pages';
+import {createStackNavigator} from '@react-navigation/stack';
 
-interface PublicRoutesProps {
-  Stack: createNativeStackNavigator;
-}
+export type PublicStackParamList = {
+  Splash: undefined;
+  Register: undefined;
+  Login: undefined;
+};
 
-export function PublicRoutes({Stack}: PropsWithChildren<PublicRoutesProps>) {
+export const PublicRoutes: FunctionComponent = () => {
+  const Stack = createStackNavigator<PublicStackParamList>();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -17,4 +20,4 @@ export function PublicRoutes({Stack}: PropsWithChildren<PublicRoutesProps>) {
       <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
   );
-}
+};
