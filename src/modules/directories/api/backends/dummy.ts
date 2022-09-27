@@ -118,4 +118,47 @@ export default class DummyDirectories implements DirectoriesBackend {
       }
     }
   }
+
+  async updateDocumentName(uuid: string, dossierUuid: string, name: string): Promise<Document> {
+    const selectedDirectory = directories.filter(
+        directory => directory.metadata.uuid === dossierUuid,
+    );
+
+    if (selectedDirectory !== undefined) {
+      if (selectedDirectory[0].documents !== null) {
+        const directoryCurrentDocument = selectedDirectory[0].documents.filter(
+            document => document.uuid === uuid,
+        );
+
+        const directoryDocuments = selectedDirectory[0].documents.filter(
+            document => document.uuid != uuid,
+        );
+
+        const newDocument: Document = {
+          directory: dossierUuid,
+          uuid: uuid,
+          image: directoryCurrentDocument[0].image,
+          name: name,
+          bookmarked: directoryCurrentDocument[0].bookmarked,
+          creationDate: directoryCurrentDocument[0].creationDate,
+        }
+
+        directoryDocuments.push(newDocument)
+
+        const currentDirectory: Directory = {
+          metadata: selectedDirectory[0].metadata,
+          documents: directoryDocuments,
+        }
+
+        const newMetadataArray = directories.filter(directory => directory.metadata.uuid !== dossierUuid);
+
+        directories = newMetadataArray;
+        directories.push(currentDirectory);
+
+        return newDocument;
+      }
+    }
+
+    throw new InternalError();
+  }
 }

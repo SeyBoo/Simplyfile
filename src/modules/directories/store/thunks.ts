@@ -53,3 +53,10 @@ export const deleteDocument = (uuid: string, dossierUuid: string): AppThunk =>
       await backendInstance.deleteDocument(uuid, dossierUuid);
       await dispatch(resetDocument());
     }
+
+export const updateDocumentName = (uuid: string, dossierUuid: string, name: string): AppThunk =>
+    async () => {
+      const backendInstance = await getDirectoriesBackend();
+      const document = await backendInstance.updateDocumentName(uuid, dossierUuid, name);
+      return document;
+    }
