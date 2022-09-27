@@ -3,7 +3,7 @@ import {Box, Button, Center, HStack, Image, Input, ScrollView, Spinner, Text} fr
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {AuthStackParamList} from "../../common/navigation/authRoutes";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/store";
-import {deleteDocument, fetchDocument} from '../../modules/directories/store/thunks';
+import {deleteDocument, fetchDocument, updateDocumentName} from '../../modules/directories/store/thunks';
 import ArrowBack from '../../common/assets/icon/arrow-square-left.png';
 import ExportIcon from '../../common/assets/icon/export.png';
 import TrashIcon from '../../common/assets/icon/trash.png';
@@ -20,6 +20,7 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
   const dispatch = useAppDispatch();
   const document = useAppSelector(state => state.directories.document);
   const navigation = useNavigation();
+  const [name, setName] = useState<string>('')
 
   const handleFetchDocument = async () => {
     try {
@@ -33,6 +34,16 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
     try {
       await dispatch(deleteDocument(uuid, directoryUuid));
       navigation.goBack();
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const handleNameChange = async () => {
+    try {
+      const document = await dispatch(updateDocumentName(uuid, directoryUuid, name));
+      //@ts-ignore
+      await dispatch(setDocument({document}))
     } catch (e) {
       console.log(e)
     }
@@ -63,7 +74,7 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
             />
           </Button>
           <HStack>
-            {<Button
+            {document.name !== name && name !== '' && <Button
                 background="transparent"
                 _pressed={{
                   opacity: .5
@@ -134,6 +145,7 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
                 p={6}
                 borderColor="gray.300"
                 defaultValue={document.name}
+                onChangeText={(text) => setName(text)}
             />
           </Box>
         </Center>
