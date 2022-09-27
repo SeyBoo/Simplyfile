@@ -1,9 +1,12 @@
 import React, {FunctionComponent, useEffect} from "react";
-import {Box, Center, Image, Input, ScrollView, Spinner, Text} from "native-base";
+import {Box, Button, Center, HStack, Image, Input, ScrollView, Spinner, Text} from "native-base";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {AuthStackParamList} from "../../common/navigation/authRoutes";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/store";
-import {fetchDocument} from '../../modules/document/store/thunks';
+import ArrowBack from '../../common/assets/icon/arrow-square-left.png';
+import ExportIcon from '../../common/assets/icon/export.png';
+import TrashIcon from '../../common/assets/icon/trash.png';
+import {useNavigation} from "@react-navigation/native";
 
 export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamList, 'Document'>> = (
     {
@@ -12,7 +15,8 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
 ) => {
   const {uuid, directoryUuid} = route.params;
   const dispatch = useAppDispatch();
-  const document = useAppSelector(state => state.document.document);
+  const document = useAppSelector(state => state.directories.document);
+  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -27,11 +31,49 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
   if (document === null || document?.uuid !== uuid) {
     return <Spinner/>;
   }
-
   return (
       <ScrollView
           mt="17.5%"
       >
+        <HStack justifyContent="space-between" px="3%" mb="2.5%">
+          <Button
+              background="transparent"
+              _pressed={{
+                opacity: .5
+              }}
+              onPress={() => navigation.goBack()}
+          >
+            <Image
+                source={ArrowBack}
+                alt={document.name}
+            />
+          </Button>
+          <HStack>
+            <Button
+                background="transparent"
+                _pressed={{
+                  opacity: .5
+                }}
+            >
+              <Image
+                  source={ExportIcon}
+                  alt={document.name}
+              />
+            </Button>
+            <Button
+                background="transparent"
+                _pressed={{
+                  opacity: .5
+                }}
+            >
+              <Image
+                  source={TrashIcon}
+                  alt={document.name}
+                  size={7}
+              />
+            </Button>
+          </HStack>
+        </HStack>
         <Center>
           <Image
               source={{uri: document.image}}
@@ -64,7 +106,7 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
                 ml="0"
                 p={6}
                 borderColor="gray.300"
-             //   onChangeText={(text) => setNewName(text)}
+                //   onChangeText={(text) => setNewName(text)}
             />
           </Box>
         </Center>

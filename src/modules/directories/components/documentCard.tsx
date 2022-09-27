@@ -4,7 +4,7 @@ import {Box, Button, HStack, Image, Text, Card, Icon} from "native-base";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import moment from 'moment';
 import {ActionSheetIOS, Alert, Platform} from "react-native";
-import {removeDirectory, updateDirectory} from "../../directories/store/thunks";
+import {removeDirectory, updateDirectory} from "../store/thunks";
 import {useNavigation} from "@react-navigation/native";
 
 interface DocumentCardProps {
