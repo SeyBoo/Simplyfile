@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect} from "react";
+import React, {FunctionComponent, useEffect, useState} from "react";
 import {Box, Button, Center, HStack, Image, Input, ScrollView, Spinner, Text} from "native-base";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {AuthStackParamList} from "../../common/navigation/authRoutes";
@@ -7,7 +7,9 @@ import {deleteDocument, fetchDocument} from '../../modules/directories/store/thu
 import ArrowBack from '../../common/assets/icon/arrow-square-left.png';
 import ExportIcon from '../../common/assets/icon/export.png';
 import TrashIcon from '../../common/assets/icon/trash.png';
+import AcceptChangeIcon from '../../common/assets/icon/accept-change.png';
 import {useNavigation} from "@react-navigation/native";
+import {setDocument} from "../../modules/directories/store/slice";
 
 export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamList, 'Document'>> = (
     {
@@ -19,6 +21,14 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
   const document = useAppSelector(state => state.directories.document);
   const navigation = useNavigation();
 
+  const handleFetchDocument = async () => {
+    try {
+      await dispatch(fetchDocument(uuid, directoryUuid));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   const handleDeleteDocument = async () => {
     try {
       await dispatch(deleteDocument(uuid, directoryUuid));
@@ -29,14 +39,8 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
   }
 
   useEffect(() => {
-    (async () => {
-      try {
-        await dispatch(fetchDocument(uuid, directoryUuid));
-      } catch (e) {
-        console.log(e);
-      }
-    })();
-  }, [document?.uuid, dispatch, uuid]);
+    (async() => handleFetchDocument())()
+  }, [handleFetchDocument]);
 
   if (document === null || document?.uuid !== uuid) {
     return <Spinner/>;
@@ -59,6 +63,19 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
             />
           </Button>
           <HStack>
+            {<Button
+                background="transparent"
+                _pressed={{
+                  opacity: .5
+                }}
+                onPress={() => handleNameChange()}
+            >
+              <Image
+                  source={AcceptChangeIcon}
+                  alt="Accept icon"
+                  size={7}
+              />
+            </Button>}
             <Button
                 background="transparent"
                 _pressed={{
@@ -67,7 +84,7 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
             >
               <Image
                   source={ExportIcon}
-                  alt={document.name}
+                  alt="Export icon"
               />
             </Button>
             <Button
@@ -79,7 +96,7 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
             >
               <Image
                   source={TrashIcon}
-                  alt={document.name}
+                  alt="trash icon"
                   size={7}
               />
             </Button>
@@ -107,7 +124,6 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
             </Text>
             <Input
                 mx="3"
-                value={document.name}
                 autoCorrect={false}
                 autoCapitalize="none"
                 fontSize="md"
@@ -117,7 +133,7 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
                 ml="0"
                 p={6}
                 borderColor="gray.300"
-                //   onChangeText={(text) => setNewName(text)}
+                defaultValue={document.name}
             />
           </Box>
         </Center>
