@@ -1,42 +1,41 @@
-import * as React from 'react';
-import {Box, Button, HStack, Image, Text,} from 'native-base';
-import {ActionSheetIOS, Alert, Platform,} from 'react-native';
+import React, {FunctionComponent} from 'react';
+import {Box, Button, HStack, Image, Text} from 'native-base';
+import {ActionSheetIOS, Alert, Platform} from 'react-native';
 import FolderIcon from '../../../common/assets/icon/folder.png';
-import {removeDirectory, updateDirectory} from "../store/thunks";
-import {useAppDispatch} from "../../../common/hooks/store";
+import {removeDirectory, updateDirectory} from '../store/thunks';
+import {useAppDispatch} from '../../../common/hooks/store';
+import {useNavigation} from '@react-navigation/native';
 
 interface DirectoryProps {
   name: string;
   uuid: string;
 }
 
-const DirectoryCard = (
-    {
-      name,
-      uuid,
-    }: DirectoryProps
-) => {
+type Nav = {
+  navigate: (value: string, arg1: any) => void;
+};
+
+const DirectoryCard: FunctionComponent<DirectoryProps> = ({name, uuid}) => {
+  const navigation = useNavigation<Nav>();
   const dispatch = useAppDispatch();
 
   const handleRenameModal = () => {
     if (Platform.OS === 'ios') {
       Alert.prompt(
-          `Update ${name}`,
-          '',
-          [
-            {text: 'Cancel', style: 'cancel'},
-            {
-              text: 'Update',
-              onPress: (text) => {
-                if (text) {
-                  (async () => (
-                      await dispatch(updateDirectory(uuid, text))
-                  ))()
-                }
+        `Update ${name}`,
+        '',
+        [
+          {text: 'Cancel', style: 'cancel'},
+          {
+            text: 'Update',
+            onPress: text => {
+              if (text) {
+                (async () => await dispatch(updateDirectory(uuid, text)))();
               }
             },
-          ],
-          'plain-text'
+          },
+        ],
+        'plain-text',
       );
     }
     // TODO Android

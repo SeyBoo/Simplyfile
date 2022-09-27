@@ -1,11 +1,11 @@
-import {Alert, Platform} from "react-native";
-import {Box, Button, HStack, Icon, Text} from "native-base";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import React from "react";
-import {useAppDispatch} from "../../../common/hooks/store";
+import {Alert, Platform} from 'react-native';
+import {Box, Button, HStack, Icon, Text} from 'native-base';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import React, {FunctionComponent} from 'react';
+import {useAppDispatch} from '../../../common/hooks/store';
 import {createDirectory} from '../store/thunks';
 
-const addDirectory = () => {
+const AddDirectory: FunctionComponent = () => {
   const dispatch = useAppDispatch()
   const handleAddNewDirectory = async (name: string) => {
     try {

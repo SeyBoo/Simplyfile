@@ -1,21 +1,21 @@
-import React from 'react';
+import React, {FunctionComponent} from 'react';
 import {
-  Text,
-  VStack,
-  HStack,
+  Box,
   Button,
   Center,
+  HStack,
   Image,
-  Box,
   ScrollView,
+  Text,
+  VStack,
 } from 'native-base';
 import IllustrationSplash from '../../common/assets/splash-illustration.png';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {PublicStackParamList} from '../../common/navigation/publicRoutes';
 
-interface SplashProps {
-  navigation: any;
-}
-
-export function Splash({navigation}: SplashProps) {
+export const Splash: FunctionComponent<
+  NativeStackScreenProps<PublicStackParamList, 'Splash'>
+> = ({navigation}) => {
   return (
     <ScrollView mb="10%">
       <Center background="#F6F6F6">
@@ -68,4 +68,4 @@ export function Splash({navigation}: SplashProps) {
       </Center>
     </ScrollView>
   );
-}
+};

@@ -1,4 +1,4 @@
-import {UserInfo} from "../../../common/types/user.interface";
+import {UserInfo} from '../../../common/types/user.interface';
 
 const NEXT_PUBLIC_AUTH_API_BACKEND_MODULE = 'firebase';
 
