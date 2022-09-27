@@ -20,6 +20,6 @@ export default class DummyDocuments implements DocumentBackend {
       }
     }
 
-    throw new Error();
+    throw new InternalError();
   }
 }
