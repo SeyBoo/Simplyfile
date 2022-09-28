@@ -74,20 +74,20 @@ export const dummyDirectories: Directory[] = [
     },
     documents: [
       {
-        name: 'invoice',
+        name: 'Simon',
         image: 'https://click-on-one-of-the-nav-links.netlify.app/static/media/Thirsty_bear.b85014f9b3e50f907bb5.jpg',
         creationDate: new Date(),
         directory: 'uuid-2',
         bookmarked: false,
-        uuid: 'doc-2'
+        uuid: 'doc-0'
       },
       {
-        name: 'invoice',
+        name: 'Igor',
         image: 'https://click-on-one-of-the-nav-links.netlify.app/static/media/Thirsty_bear.b85014f9b3e50f907bb5.jpg',
         creationDate: new Date(),
         directory: 'uuid-2',
         bookmarked: false,
-        uuid: 'doc-2'
+        uuid: 'doc-1'
       },
     ],
   },
