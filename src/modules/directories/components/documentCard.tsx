@@ -7,7 +7,6 @@ import {ActionSheetIOS, Alert, Platform} from "react-native";
 import {deleteDocument, updateDocumentName} from "../store/thunks";
 import {useNavigation} from "@react-navigation/native";
 import {useAppDispatch} from "../../../common/hooks/store";
-import {setDocument} from "../store/slice";
 
 interface DocumentCardProps {
   document: Document;

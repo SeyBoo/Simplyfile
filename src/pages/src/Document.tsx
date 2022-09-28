@@ -82,7 +82,7 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
   }
 
   useEffect(() => {
-    (async() => handleFetchDocument())()
+    (async () => handleFetchDocument())()
   }, [handleFetchDocument]);
 
   if (document === null || document?.uuid !== uuid) {
