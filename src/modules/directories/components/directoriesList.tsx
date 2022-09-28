@@ -2,10 +2,10 @@ import {HStack, ScrollView} from 'native-base';
 import AddDirectory from './addDirectory';
 import DirectoryCard from './directoryCard';
 import React, {FunctionComponent} from 'react';
-import {Directory} from '../../../common/types/directory.interface';
+import {DirectoryMetadata} from '../../../common/types/directory.interface';
 
 interface DirectoryListProps {
-  directories: Directory[] | null;
+  directories: DirectoryMetadata[] | null;
 }
 
 const DirectoriesList: FunctionComponent<DirectoryListProps> = ({

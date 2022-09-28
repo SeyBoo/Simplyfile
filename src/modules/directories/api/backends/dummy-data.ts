@@ -6,7 +6,7 @@ export const dummyDirectories: Directory[] = [
   {
     metadata: {
       uuid: 'uuid-0',
-      name: 'cat balls',
+      name: 'nom-0',
     },
     documents: [
       {

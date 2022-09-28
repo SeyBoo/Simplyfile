@@ -1,6 +1,8 @@
 import {DirectoriesBackend} from '../index';
 import {Directory, DirectoryMetadata,} from '../../../../common/types/directory.interface';
 import {dummyDirectories, dummyDirectoriesMetadata} from './dummy-data';
+import {Document} from "../../../../common/types/documents.interface";
+import {InternalError} from "../error";
 
 let directories = dummyDirectories;
 let directoriesMetadata = dummyDirectoriesMetadata;
@@ -74,5 +76,132 @@ export default class DummyDirectories implements DirectoriesBackend {
         directory => directory.metadata.uuid === uuid,
     );
     return filteredDirectory[0];
+  }
+
+  async fetchDocument(uuid: string, dossierUuid: string): Promise<Document> {
+    const selectedDirectory = directories.filter(
+        directory => directory.metadata.uuid === dossierUuid,
+    );
+
+    if (selectedDirectory !== undefined) {
+      if (selectedDirectory[0].documents !== null) {
+        const selectedDocument = selectedDirectory[0].documents.filter(
+            document => document.uuid === uuid,
+        );
+        return selectedDocument[0];
+      }
+    }
+
+    throw new InternalError();
+  }
+
+  async deleteDocument(uuid: string, dossierUuid: string): Promise<void> {
+    const selectedDirectory = directories.filter(
+        directory => directory.metadata.uuid === dossierUuid,
+    );
+
+    if (selectedDirectory !== undefined) {
+      if (selectedDirectory[0].documents !== null) {
+        const directoryDocument = selectedDirectory[0].documents.filter(
+            document => document.uuid !== uuid,
+        );
+
+        const currentDirectory: Directory = {
+          metadata: selectedDirectory[0].metadata,
+          documents: directoryDocument,
+        }
+
+        const newMetadataArray = directories.filter(directory => directory.metadata.uuid !== dossierUuid);
+
+        directories = newMetadataArray;
+        directories.push(currentDirectory);
+      }
+    }
+  }
+
+  async updateDocumentName(uuid: string, dossierUuid: string, name: string): Promise<Document> {
+    const selectedDirectory = directories.filter(
+        directory => directory.metadata.uuid === dossierUuid,
+    );
+
+    if (selectedDirectory !== undefined) {
+      if (selectedDirectory[0].documents !== null) {
+        const directoryCurrentDocument = selectedDirectory[0].documents.filter(
+            document => document.uuid === uuid,
+        );
+
+        const directoryDocuments = selectedDirectory[0].documents.filter(
+            document => document.uuid != uuid,
+        );
+
+        const newDocument: Document = {
+          directory: dossierUuid,
+          uuid: uuid,
+          image: directoryCurrentDocument[0].image,
+          name: name,
+          bookmarked: directoryCurrentDocument[0].bookmarked,
+          creationDate: directoryCurrentDocument[0].creationDate,
+        }
+
+        directoryDocuments.push(newDocument)
+
+        const currentDirectory: Directory = {
+          metadata: selectedDirectory[0].metadata,
+          documents: directoryDocuments,
+        }
+
+        const newMetadataArray = directories.filter(directory => directory.metadata.uuid !== dossierUuid);
+
+        directories = newMetadataArray;
+        directories.push(currentDirectory);
+
+        return newDocument;
+      }
+    }
+
+    throw new InternalError();
+  }
+
+  async bookmarkDocument(uuid: string, dossierUuid: string): Promise<Document> {
+    const selectedDirectory = directories.filter(
+        directory => directory.metadata.uuid === dossierUuid,
+    );
+
+    if (selectedDirectory !== undefined) {
+      if (selectedDirectory[0].documents !== null) {
+        const directoryCurrentDocument = selectedDirectory[0].documents.filter(
+            document => document.uuid === uuid,
+        );
+
+        const directoryDocuments = selectedDirectory[0].documents.filter(
+            document => document.uuid != uuid,
+        );
+
+        const newDocument: Document = {
+          directory: dossierUuid,
+          uuid: uuid,
+          image: directoryCurrentDocument[0].image,
+          name: directoryCurrentDocument[0].name,
+          bookmarked: !directoryCurrentDocument[0].bookmarked,
+          creationDate: directoryCurrentDocument[0].creationDate,
+        }
+
+        directoryDocuments.push(newDocument)
+
+        const currentDirectory: Directory = {
+          metadata: selectedDirectory[0].metadata,
+          documents: directoryDocuments,
+        }
+
+        const newMetadataArray = directories.filter(directory => directory.metadata.uuid !== dossierUuid);
+
+        directories = newMetadataArray;
+        directories.push(currentDirectory);
+
+        return newDocument;
+      }
+    }
+
+    throw new InternalError();
   }
 }
