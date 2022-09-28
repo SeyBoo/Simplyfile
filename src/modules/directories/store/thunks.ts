@@ -60,3 +60,10 @@ export const updateDocumentName = (uuid: string, dossierUuid: string, name: stri
       const document = await backendInstance.updateDocumentName(uuid, dossierUuid, name);
       return document;
     }
+
+export const bookmarkDocument = (uuid: string, dossierUuid: string): AppThunk =>
+    async () => {
+      const backendInstance = await getDirectoriesBackend();
+      const document = await backendInstance.bookmarkDocument(uuid, dossierUuid);
+      return document;
+    }

@@ -19,6 +19,8 @@ export interface DirectoriesBackend {
   deleteDocument(uuid: string, dossierUuid: string): Promise<void>;
 
   updateDocumentName(uuid: string, dossierUuid: string, name: string): Promise<Document>;
+
+  bookmarkDocument(uuid: string, dossierUuid: string): Promise<Document>;
 }
 
 let authBackendInstance: DirectoriesBackend | undefined;
