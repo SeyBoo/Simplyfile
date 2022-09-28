@@ -10,6 +10,8 @@ import TrashIcon from '../../common/assets/icon/trash.png';
 import AcceptChangeIcon from '../../common/assets/icon/accept-change.png';
 import {useNavigation} from "@react-navigation/native";
 import {setDocument} from "../../modules/directories/store/slice";
+import {CameraRoll} from "@react-native-camera-roll/camera-roll";
+import {Alert, PermissionsAndroid, Platform} from "react-native";
 
 export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamList, 'Document'>> = (
     {
@@ -29,6 +31,36 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
       console.log(e);
     }
   }
+
+
+    async function hasAndroidPermission() {
+      const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
+
+      const hasPermission = await PermissionsAndroid.check(permission);
+      if (hasPermission) {
+        return true;
+      }
+
+      const status = await PermissionsAndroid.request(permission);
+      return status === 'granted';
+    }
+
+    async function handleSaveImage() {
+      if (Platform.OS === "android" && !(await hasAndroidPermission())) {
+        return;
+      }
+
+      if (document)
+        await CameraRoll.save(document?.image).then(() => {
+          Alert.alert(
+              "Successfully saved",
+              "",
+              [
+                { text: "OK"}
+              ]
+          );
+        })
+    };
 
   const handleDeleteDocument = async () => {
     try {
@@ -92,6 +124,7 @@ export const Document: FunctionComponent<NativeStackScreenProps<AuthStackParamLi
                 _pressed={{
                   opacity: .5
                 }}
+                onPress={() => handleSaveImage()}
             >
               <Image
                   source={ExportIcon}
