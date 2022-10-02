@@ -6,32 +6,35 @@ import {useAppDispatch} from '../../../common/hooks/store';
 import {createDirectory} from '../store/thunks';
 
 const AddDirectory: FunctionComponent = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+
   const handleAddNewDirectory = async (name: string) => {
     try {
-      await dispatch(createDirectory(name))
+      await dispatch(createDirectory(name));
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   const handlePress = () => {
     if (Platform.OS === 'ios') {
       Alert.prompt(
-          'Add New Directory',
-          '',
-          [
-            {text: 'Cancel', style: 'cancel'},
-            {
-              text: 'Add',
-              onPress: (text) => {
-                if (text) {
-                  handleAddNewDirectory(text).then(() => {return})
-                }
+        'Add New Directory',
+        '',
+        [
+          {text: 'Cancel', style: 'cancel'},
+          {
+            text: 'Add',
+            onPress: text => {
+              if (text) {
+                handleAddNewDirectory(text).then(() => {
+                  return;
+                });
               }
             },
-          ],
-          'plain-text'
+          },
+        ],
+        'plain-text',
       );
     }
     // TODO Android

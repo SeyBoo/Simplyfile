@@ -10,7 +10,7 @@ export type AuthStackParamList = {
   NestedHome: undefined;
   Home: undefined;
   Directory: {uuid: string};
-  Document: {uuid: string, directoryUuid: string};
+  Document: {uuid: string; directoryUuid: string};
   Create: undefined;
 };
 
@@ -55,9 +55,9 @@ export const AuthRoutes: FunctionComponent = () => {
         }}
       />
       <Tab.Screen
-          name="Create"
-          component={() => null}
-          options={{ tabBarButton: () => <Create /> }}
+        name="Create"
+        component={() => null}
+        options={{tabBarButton: () => <Create />}}
       />
     </Tab.Navigator>
   );

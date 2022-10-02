@@ -1,7 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import initialState from './state';
-import {Directory, DirectoryMetadata} from '../../../common/types/directory.interface';
-import {Document} from "../../../common/types/documents.interface";
+import {
+  Directory,
+  DirectoryMetadata,
+} from '../../../common/types/directory.interface';
+import {Document} from '../../../common/types/documents.interface';
 
 interface SetDirectoriesPayload {
   directories: DirectoryMetadata[];
@@ -37,12 +40,17 @@ const DirectoriesSlice = createSlice({
     setDocument: (state, action: PayloadAction<setDocumentPayload>) => {
       state.document = action.payload.document;
     },
-    resetDocument: (state) => {
+    resetDocument: state => {
       state.document = null;
-    }
+    },
   },
 });
 
-export const {setDirectories, addNewDirectory, setDirectory, setDocument, resetDocument} =
-    DirectoriesSlice.actions;
+export const {
+  setDirectories,
+  addNewDirectory,
+  setDirectory,
+  setDocument,
+  resetDocument,
+} = DirectoriesSlice.actions;
 export default DirectoriesSlice;
