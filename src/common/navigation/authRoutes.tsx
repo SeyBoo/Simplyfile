@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Image} from 'native-base';
-import {Directory, Home, Document} from '../../pages';
+import {Directory, Home, Document, Create} from '../../pages';
 import HomeActive from '../assets/bottom-tabs/active/home.png';
 import HomeInActive from '../assets/bottom-tabs/inactive/home.png';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -10,7 +10,8 @@ export type AuthStackParamList = {
   NestedHome: undefined;
   Home: undefined;
   Directory: {uuid: string};
-  Document: {uuid: string, directoryUuid: string};
+  Document: {uuid: string; directoryUuid: string};
+  Create: undefined;
 };
 
 export const AuthRoutes: FunctionComponent = () => {
@@ -52,6 +53,11 @@ export const AuthRoutes: FunctionComponent = () => {
             ),
           headerShown: false,
         }}
+      />
+      <Tab.Screen
+        name="Create"
+        component={() => null}
+        options={{tabBarButton: () => <Create />}}
       />
     </Tab.Navigator>
   );

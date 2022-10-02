@@ -1,5 +1,8 @@
-import {Directory, DirectoryMetadata,} from '../../../common/types/directory.interface';
-import {Document} from "../../../common/types/documents.interface";
+import {
+  Directory,
+  DirectoryMetadata,
+} from '../../../common/types/directory.interface';
+import {Document} from '../../../common/types/documents.interface';
 
 const DIRECTORIES_API_BACKEND_MODULE = 'dummy';
 
@@ -18,7 +21,11 @@ export interface DirectoriesBackend {
 
   deleteDocument(uuid: string, dossierUuid: string): Promise<void>;
 
-  updateDocumentName(uuid: string, dossierUuid: string, name: string): Promise<Document>;
+  updateDocumentName(
+    uuid: string,
+    dossierUuid: string,
+    name: string,
+  ): Promise<Document>;
 
   bookmarkDocument(uuid: string, dossierUuid: string): Promise<Document>;
 }

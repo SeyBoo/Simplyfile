@@ -1,6 +1,6 @@
 import {UserInfo} from '../../../common/types/user.interface';
 
-const NEXT_PUBLIC_AUTH_API_BACKEND_MODULE = 'firebase';
+const NEXT_PUBLIC_AUTH_API_BACKEND_MODULE = 'dummy';
 
 export interface AuthBackend {
   loginWithEmailPassword(email: string, password: string): Promise<UserInfo>;

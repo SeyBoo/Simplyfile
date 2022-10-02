@@ -53,7 +53,7 @@ const FormControl: FunctionComponent<FormControlProps> = ({
         }
       />
     );
-  }, [error, initialValue, onChange, placeholder, required, show, setShow]);
+  }, [type, initialValue, onChange, placeholder, show, setShow]);
 
   return (
     <Box mt={5}>
