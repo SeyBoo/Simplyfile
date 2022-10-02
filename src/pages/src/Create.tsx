@@ -4,7 +4,6 @@ import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
-import {useNavigation} from '@react-navigation/native';
 import CreateIconInActive from '../../common/assets/icon/add.png';
 import FileIcon from '../../common/assets/icon/file.png';
 import CameraIcon from '../../common/assets/icon/camera.png';
@@ -22,11 +21,11 @@ import {
 import {launchCamera} from 'react-native-image-picker';
 
 export const Create: FunctionComponent = () => {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['50%'], []);
   const [loaded, setLoaded] = useState(false);
-  const [image, setImage] = useState('');
+  // const [image, setImage] = useState('');
 
   const handleSnapPress = React.useCallback((index: number) => {
     sheetRef.current?.snapToIndex(index);

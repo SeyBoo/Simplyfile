@@ -147,7 +147,7 @@ export default class DummyDirectories implements DirectoriesBackend {
         );
 
         const directoryDocuments = selectedDirectory[0].documents.filter(
-          document => document.uuid != uuid,
+          document => document.uuid !== uuid,
         );
 
         const newDocument: Document = {
@@ -192,7 +192,7 @@ export default class DummyDirectories implements DirectoriesBackend {
         );
 
         const directoryDocuments = selectedDirectory[0].documents.filter(
-          document => document.uuid != uuid,
+          document => document.uuid !== uuid,
         );
 
         const newDocument: Document = {

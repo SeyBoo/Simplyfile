@@ -1,4 +1,4 @@
-import {FunctionComponent} from 'react';
+import React, {FunctionComponent} from 'react';
 import {Document} from '../../../common/types/documents.interface';
 import DocumentCard from './documentCard';
 import {HStack} from 'native-base';

@@ -1,4 +1,4 @@
-import {FunctionComponent} from 'react';
+import React, {FunctionComponent} from 'react';
 import {Document} from '../../../common/types/documents.interface';
 import {Box, Button, Card, HStack, Icon, Image, Text} from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
