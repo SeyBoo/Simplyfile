@@ -22,32 +22,31 @@ import {
   deleteDocument,
   fetchDocument,
   updateDocumentName,
-} from '../../modules/directories/store/thunks';
+} from '../../modules/documents/store/thunks';
 import ArrowBack from '../../common/assets/icon/arrow-square-left.png';
 import ExportIcon from '../../common/assets/icon/export.png';
 import TrashIcon from '../../common/assets/icon/trash.png';
 import AcceptChangeIcon from '../../common/assets/icon/accept-change.png';
 import {useNavigation} from '@react-navigation/native';
-import {setDocument} from '../../modules/directories/store/slice';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import {Alert, PermissionsAndroid, Platform} from 'react-native';
 
 export const Document: FunctionComponent<
   NativeStackScreenProps<AuthStackParamList, 'Document'>
 > = ({route}) => {
-  const {uuid, directoryUuid} = route.params;
+  const {uuid} = route.params;
   const dispatch = useAppDispatch();
-  const document = useAppSelector(state => state.directories.document);
+  const document = useAppSelector(state => state.documents.document);
   const navigation = useNavigation();
   const [name, setName] = useState<string>('');
 
   const handleFetchDocument = useCallback(async () => {
     try {
-      await dispatch(fetchDocument(uuid, directoryUuid));
+      await dispatch(fetchDocument(uuid));
     } catch (e) {
       console.log(e);
     }
-  }, [dispatch, uuid, directoryUuid]);
+  }, [dispatch, uuid]);
 
   async function hasAndroidPermission() {
     const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
@@ -75,7 +74,7 @@ export const Document: FunctionComponent<
 
   const handleDeleteDocument = async () => {
     try {
-      await dispatch(deleteDocument(uuid, directoryUuid));
+      await dispatch(deleteDocument(uuid));
       navigation.goBack();
     } catch (e) {
       console.log(e);
@@ -84,11 +83,8 @@ export const Document: FunctionComponent<
 
   const handleNameChange = async () => {
     try {
-      const updatedDocument = await dispatch(
-        updateDocumentName(uuid, directoryUuid, name),
-      );
-      //@ts-ignore
-      await dispatch(setDocument({document: updatedDocument}));
+      await dispatch(updateDocumentName(uuid, name));
+      await handleFetchDocument();
     } catch (e) {
       console.log(e);
     }

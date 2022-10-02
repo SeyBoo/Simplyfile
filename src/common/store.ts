@@ -1,11 +1,13 @@
 import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import userSlice from '../modules/auth/store/slice';
 import DirectoriesSlice from '../modules/directories/store/slice';
+import DocumentsSlice from '../modules/documents/store/slice';
 
 const store = configureStore({
   reducer: {
     [userSlice.name]: userSlice.reducer,
     [DirectoriesSlice.name]: DirectoriesSlice.reducer,
+    [DocumentsSlice.name]: DocumentsSlice.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

@@ -8,7 +8,7 @@ import {
   deleteDocument,
   updateDocumentName,
   bookmarkDocument,
-} from '../store/thunks';
+} from '../../documents/store/thunks';
 import {useNavigation} from '@react-navigation/native';
 import {useAppDispatch} from '../../../common/hooks/store';
 
@@ -30,17 +30,17 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
   const {uuid, directory} = document;
 
   const handleRename = async (text: string) => {
-    await dispatch(updateDocumentName(uuid, directory, text));
+    await dispatch(updateDocumentName(uuid, text));
     await handleFetchDirectory();
   };
 
   const handleDelete = async () => {
-    await dispatch(deleteDocument(uuid, directory));
+    await dispatch(deleteDocument(uuid));
     await handleFetchDirectory();
   };
 
   const handleBookmark = async () => {
-    await dispatch(bookmarkDocument(uuid, directory));
+    await dispatch(bookmarkDocument(uuid));
     await handleFetchDirectory();
   };
 

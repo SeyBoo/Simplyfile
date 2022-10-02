@@ -4,7 +4,6 @@ import {
   Directory,
   DirectoryMetadata,
 } from '../../../common/types/directory.interface';
-import {Document} from '../../../common/types/documents.interface';
 
 interface SetDirectoriesPayload {
   directories: DirectoryMetadata[];
@@ -16,10 +15,6 @@ interface AddNewDirectoryPayload {
 
 interface SelectDirectoryPayload {
   directory: Directory;
-}
-
-interface setDocumentPayload {
-  document: Document;
 }
 
 const DirectoriesSlice = createSlice({
@@ -37,12 +32,6 @@ const DirectoriesSlice = createSlice({
     setDirectory: (state, action: PayloadAction<SelectDirectoryPayload>) => {
       state.currentDirectory = action.payload.directory;
     },
-    setDocument: (state, action: PayloadAction<setDocumentPayload>) => {
-      state.document = action.payload.document;
-    },
-    resetDocument: state => {
-      state.document = null;
-    },
   },
 });
 
@@ -50,7 +39,5 @@ export const {
   setDirectories,
   addNewDirectory,
   setDirectory,
-  setDocument,
-  resetDocument,
 } = DirectoriesSlice.actions;
 export default DirectoriesSlice;

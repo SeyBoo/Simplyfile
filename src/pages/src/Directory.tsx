@@ -5,7 +5,7 @@ import {fetchDirectory} from '../../modules/directories/store/thunks';
 import {Spinner} from 'native-base';
 import {AuthStackParamList} from '../../common/navigation/authRoutes';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import DocumentsList from '../../modules/directories/components/documentsList';
+import DocumentsList from '../../modules/documents/components/documentsList';
 
 export const Directory: FunctionComponent<
   NativeStackScreenProps<AuthStackParamList, 'Directory'>
@@ -13,7 +13,7 @@ export const Directory: FunctionComponent<
   const {uuid} = route.params;
   const dispatch = useAppDispatch();
   const directory = useAppSelector(state => state.directories.currentDirectory);
-  const currentDocument = useAppSelector(state => state.directories.document);
+  const currentDocument = useAppSelector(state => state.documents.document);
 
   const handleFetchDirectory = useCallback(async () => {
     try {

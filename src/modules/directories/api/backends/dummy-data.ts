@@ -3,7 +3,7 @@ import {
   DirectoryMetadata,
 } from '../../../../common/types/directory.interface';
 
-export const dummyDirectories: Directory[] = [
+export const DummyDirectories: Directory[] = [
   {
     metadata: {
       uuid: 'uuid-0',

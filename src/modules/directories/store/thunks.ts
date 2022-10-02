@@ -1,12 +1,6 @@
 import {AppThunk} from '../../../common/store';
 import {getDirectoriesBackend} from '../api';
-import {
-  addNewDirectory,
-  resetDocument,
-  setDirectories,
-  setDirectory,
-  setDocument,
-} from './slice';
+import {addNewDirectory, setDirectories, setDirectory} from './slice';
 
 export const fetchDirectories = (): AppThunk => async dispatch => {
   const directoryBackend = await getDirectoriesBackend();
@@ -44,40 +38,4 @@ export const fetchDirectory =
     const directoryBackend = await getDirectoriesBackend();
     const directory = await directoryBackend.fetchDirectory(uuid);
     await dispatch(setDirectory({directory}));
-  };
-
-export const fetchDocument =
-  (uuid: string, dossierUuid: string): AppThunk =>
-  async dispatch => {
-    const backendInstance = await getDirectoriesBackend();
-    const document = await backendInstance.fetchDocument(uuid, dossierUuid);
-    await dispatch(setDocument({document}));
-  };
-
-export const deleteDocument =
-  (uuid: string, dossierUuid: string): AppThunk =>
-  async dispatch => {
-    const backendInstance = await getDirectoriesBackend();
-    await backendInstance.deleteDocument(uuid, dossierUuid);
-    await dispatch(resetDocument());
-  };
-
-export const updateDocumentName =
-  (uuid: string, dossierUuid: string, name: string): AppThunk =>
-  async () => {
-    const backendInstance = await getDirectoriesBackend();
-    const document = await backendInstance.updateDocumentName(
-      uuid,
-      dossierUuid,
-      name,
-    );
-    return document;
-  };
-
-export const bookmarkDocument =
-  (uuid: string, dossierUuid: string): AppThunk =>
-  async () => {
-    const backendInstance = await getDirectoriesBackend();
-    const document = await backendInstance.bookmarkDocument(uuid, dossierUuid);
-    return document;
   };
