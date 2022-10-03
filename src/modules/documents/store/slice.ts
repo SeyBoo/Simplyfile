@@ -6,6 +6,10 @@ interface setDocumentPayload {
   document: Document;
 }
 
+interface setLastUpdatedPayload {
+  lastUpdated: Document[];
+}
+
 const DocumentsSlice = createSlice({
   name: 'documents',
   initialState,
@@ -13,11 +17,11 @@ const DocumentsSlice = createSlice({
     setDocument: (state, action: PayloadAction<setDocumentPayload>) => {
       state.document = action.payload.document;
     },
-    resetDocument: state => {
-      state.document = null;
+    setLastUpdated: (state, action: PayloadAction<setLastUpdatedPayload>) => {
+      state.lastUpdated = action.payload.lastUpdated;
     },
   },
 });
 
-export const {setDocument, resetDocument} = DocumentsSlice.actions;
+export const {setDocument, setLastUpdated} = DocumentsSlice.actions;
 export default DocumentsSlice;

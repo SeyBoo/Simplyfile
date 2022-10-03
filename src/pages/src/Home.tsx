@@ -1,13 +1,24 @@
-import React, {useEffect, FunctionComponent} from 'react';
-import {Box, Text} from 'native-base';
+import React, {FunctionComponent, useCallback, useEffect} from 'react';
+import {Box, HStack, ScrollView, Text} from 'native-base';
 import PageLayout from '../../common/layouts/pageLayout';
 import DirectoriesList from '../../modules/directories/components/directoriesList';
 import {useAppDispatch, useAppSelector} from '../../common/hooks/store';
 import {fetchDirectories} from '../../modules/directories/store/thunks';
+import {fetchDocuments} from '../../modules/documents/store/thunks';
+import DocumentCard from '../../modules/documents/components/documentCard';
 
 export const Home: FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const directories = useAppSelector(state => state.directories.directories);
+  const lastUpdated = useAppSelector(state => state.documents.lastUpdated);
+
+  const handleFetchLastUpdated = useCallback(async () => {
+    try {
+      await dispatch(fetchDocuments());
+    } catch (e) {
+      console.log(e);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     if (directories === null) {
@@ -19,7 +30,10 @@ export const Home: FunctionComponent = () => {
         }
       })();
     }
-  }, [directories, dispatch]);
+    if (lastUpdated === null) {
+      (async () => await handleFetchLastUpdated())();
+    }
+  }, [handleFetchLastUpdated, lastUpdated, directories, dispatch]);
 
   return (
     <PageLayout title="Search" subtitle="for your files">
@@ -60,27 +74,23 @@ export const Home: FunctionComponent = () => {
         </Text>
         <DirectoriesList directories={directories} />
       </Box>
-      {/*Show the last viewed*/}
-      {/*<Box*/}
-      {/*    mt={10}*/}
-      {/*    mb="30%"*/}
-      {/*>*/}
-      {/*  <Text*/}
-      {/*      fontSize="3xl"*/}
-      {/*      fontWeight="bold"*/}
-      {/*  >*/}
-      {/*    Last wieved*/}
-      {/*  </Text>*/}
-      {/*  <ScrollView*/}
-      {/*      horizontal*/}
-      {/*      showsHorizontalScrollIndicator={false}*/}
-      {/*  >*/}
-      {/*    <HStack*/}
-      {/*        ml={-4}*/}
-      {/*    >*/}
-      {/*    </HStack>*/}
-      {/*  </ScrollView>*/}
-      {/*</Box>*/}
+      <Box mt={10} mb="30%">
+        <Text fontSize="3xl" fontWeight="bold">
+          Last updated
+        </Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <HStack ml={-4} space={5}>
+            {lastUpdated &&
+              lastUpdated.map(document => (
+                <DocumentCard
+                  document={document}
+                  key={document.uuid}
+                  handleRefetch={handleFetchLastUpdated}
+                />
+              ))}
+          </HStack>
+        </ScrollView>
+      </Box>
     </PageLayout>
   );
 };

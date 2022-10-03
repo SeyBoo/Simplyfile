@@ -36,6 +36,7 @@ export default class DocumentDummy implements DocumentsBackend {
       name: name,
       bookmarked: selectedDocument[0].bookmarked,
       creationDate: selectedDocument[0].creationDate,
+      lastUpdate: new Date(),
     };
 
     documentsList.push(newDocument);
@@ -59,10 +60,15 @@ export default class DocumentDummy implements DocumentsBackend {
       name: selectedDocument[0].name,
       bookmarked: !selectedDocument[0].bookmarked,
       creationDate: selectedDocument[0].creationDate,
+      lastUpdate: selectedDocument[0].lastUpdate,
     };
 
     documentsList.push(newDocument);
 
     global.documents = documentsList;
+  }
+
+  async fetchDocuments(): Promise<Document[]> {
+    return await global.documents;
   }
 }
