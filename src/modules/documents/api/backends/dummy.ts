@@ -1,6 +1,6 @@
-import {Document} from "../../../../common/types/documents.interface";
-import {DummyDocuments} from "./dummy-data";
-import {DocumentsBackend} from "../index";
+import {Document} from '../../../../common/types/documents.interface';
+import {DummyDocuments} from './dummy-data';
+import {DocumentsBackend} from '../index';
 
 global.documents = DummyDocuments;
 

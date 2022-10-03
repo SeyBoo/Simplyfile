@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useCallback, useEffect } from "react";
-import { Box, HStack, ScrollView, Text } from "native-base";
-import PageLayout from "../../common/layouts/pageLayout";
-import DirectoriesList from "../../modules/directories/components/directoriesList";
-import { useAppDispatch, useAppSelector } from "../../common/hooks/store";
-import { fetchDirectories } from "../../modules/directories/store/thunks";
-import { fetchLastUpdated } from "../../modules/documents/store/thunks";
-import DocumentCard from "../../modules/documents/components/documentCard";
+import React, {FunctionComponent, useCallback, useEffect} from 'react';
+import {Box, HStack, ScrollView, Text} from 'native-base';
+import PageLayout from '../../common/layouts/pageLayout';
+import DirectoriesList from '../../modules/directories/components/directoriesList';
+import {useAppDispatch, useAppSelector} from '../../common/hooks/store';
+import {fetchDirectories} from '../../modules/directories/store/thunks';
+import {fetchLastUpdated} from '../../modules/documents/store/thunks';
+import DocumentCard from '../../modules/documents/components/documentCard';
 
 export const Home: FunctionComponent = () => {
   const dispatch = useAppDispatch();

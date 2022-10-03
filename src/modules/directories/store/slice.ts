@@ -35,9 +35,6 @@ const DirectoriesSlice = createSlice({
   },
 });
 
-export const {
-  setDirectories,
-  addNewDirectory,
-  setDirectory,
-} = DirectoriesSlice.actions;
+export const {setDirectories, addNewDirectory, setDirectory} =
+  DirectoriesSlice.actions;
 export default DirectoriesSlice;
