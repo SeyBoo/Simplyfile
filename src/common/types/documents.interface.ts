@@ -3,6 +3,7 @@ export interface Document {
   name: string;
   image: string;
   creationDate: Date;
+  lastUpdate: Date;
   directory: string;
   bookmarked: boolean;
 }

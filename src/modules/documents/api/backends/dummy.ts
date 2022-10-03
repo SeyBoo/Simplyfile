@@ -1,6 +1,6 @@
-import {Document} from '../../../../common/types/documents.interface';
-import {DummyDocuments} from './dummy-data';
-import {DocumentsBackend} from '../index';
+import {Document} from "../../../../common/types/documents.interface";
+import {DummyDocuments} from "./dummy-data";
+import {DocumentsBackend} from "../index";
 
 global.documents = DummyDocuments;
 
@@ -36,6 +36,7 @@ export default class DocumentDummy implements DocumentsBackend {
       name: name,
       bookmarked: selectedDocument[0].bookmarked,
       creationDate: selectedDocument[0].creationDate,
+      lastUpdate: new Date(),
     };
 
     documentsList.push(newDocument);
@@ -59,6 +60,7 @@ export default class DocumentDummy implements DocumentsBackend {
       name: selectedDocument[0].name,
       bookmarked: !selectedDocument[0].bookmarked,
       creationDate: selectedDocument[0].creationDate,
+      lastUpdate: selectedDocument[0].lastUpdate,
     };
 
     documentsList.push(newDocument);
