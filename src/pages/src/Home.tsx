@@ -36,7 +36,10 @@ export const Home: FunctionComponent = () => {
   }, [handleFetchLastUpdated, lastUpdated, directories, dispatch]);
 
   return (
-    <PageLayout title="Search" subtitle="for your files">
+    <PageLayout
+      title="Search"
+      subtitle="for your files"
+      refetch={() => handleFetchLastUpdated()}>
       {/*<HStack*/}
       {/*    mt="7.5%"*/}
       {/*>*/}
