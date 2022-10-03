@@ -36,3 +36,10 @@ export const fetchDocuments = (): AppThunk => async dispatch => {
   const lastUpdated = await backendInstance.fetchDocuments();
   await dispatch(setLastUpdated({lastUpdated}));
 };
+
+export const addNewDocument =
+  (name: string, uri: string): AppThunk =>
+  async () => {
+    const backendInstance = await getDocumentsBackend();
+    await backendInstance.addDocument(name, uri);
+  };
