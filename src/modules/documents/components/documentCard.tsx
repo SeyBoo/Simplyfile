@@ -14,7 +14,7 @@ import {useAppDispatch} from '../../../common/hooks/store';
 
 interface DocumentCardProps {
   document: Document;
-  handleFetchDirectory: () => Promise<void>;
+  handleRefetch: () => Promise<void>;
 }
 
 type Nav = {
@@ -23,7 +23,7 @@ type Nav = {
 
 const DocumentCard: FunctionComponent<DocumentCardProps> = ({
   document,
-  handleFetchDirectory,
+  handleRefetch,
 }) => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation<Nav>();
@@ -31,17 +31,17 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
 
   const handleRename = async (text: string) => {
     await dispatch(updateDocumentName(uuid, text));
-    await handleFetchDirectory();
+    await handleRefetch();
   };
 
   const handleDelete = async () => {
     await dispatch(deleteDocument(uuid));
-    await handleFetchDirectory();
+    await handleRefetch();
   };
 
   const handleBookmark = async () => {
     await dispatch(bookmarkDocument(uuid));
-    await handleFetchDirectory();
+    await handleRefetch();
   };
 
   const handleRenameModal = () => {

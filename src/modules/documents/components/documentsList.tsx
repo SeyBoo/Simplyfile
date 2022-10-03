@@ -22,7 +22,7 @@ const DocumentsList: FunctionComponent<DocumentsListProps> = ({
         <DocumentCard
           document={document}
           key={document.uuid}
-          handleFetchDirectory={handleFetchDirectory}
+          handleRefetch={handleFetchDirectory}
         />
       ))}
     </HStack>
