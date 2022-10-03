@@ -12,6 +12,8 @@ export interface DocumentsBackend {
   bookmarkDocument(uuid: string): Promise<void>;
 
   fetchDocuments(): Promise<Document[]>;
+
+  addDocument(name: string, uri: string): Promise<void>;
 }
 
 let authBackendInstance: DocumentsBackend | undefined;

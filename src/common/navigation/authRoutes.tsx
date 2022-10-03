@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Image} from 'native-base';
-import {Directory, Home, Document, Create} from '../../pages';
+import {Directory, Home, Document, Create, AddNewDocument} from '../../pages';
 import HomeActive from '../assets/bottom-tabs/active/home.png';
 import HomeInActive from '../assets/bottom-tabs/inactive/home.png';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -11,6 +11,7 @@ export type AuthStackParamList = {
   Home: undefined;
   Directory: {uuid: string};
   Document: {uuid: string; directoryUuid: string};
+  AddNewDocument: {fileName: string; uri: string};
   Create: undefined;
 };
 
@@ -27,6 +28,7 @@ export const AuthRoutes: FunctionComponent = () => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Directory" component={Directory} />
         <Stack.Screen name="Document" component={Document} />
+        <Stack.Screen name="AddNewDocument" component={AddNewDocument} />
       </Stack.Navigator>
     );
   };

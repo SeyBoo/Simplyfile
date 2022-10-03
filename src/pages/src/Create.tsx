@@ -1,4 +1,10 @@
-import React, {FunctionComponent, useMemo, useRef, useState} from 'react';
+import React, {
+  FunctionComponent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {Portal, PortalHost} from '@gorhom/portal';
 import BottomSheet, {
   BottomSheetBackdrop,
@@ -19,10 +25,19 @@ import {
   VStack,
 } from 'native-base';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import { CameraOptions, ImageLibraryOptions, ImagePickerResponse } from "react-native-image-picker/src/types";
+import {
+  CameraOptions,
+  ImageLibraryOptions,
+  ImagePickerResponse,
+} from 'react-native-image-picker/src/types';
+import {useNavigation} from '@react-navigation/native';
+
+type Nav = {
+  navigate: (value: string, arg1: any) => void;
+};
 
 export const Create: FunctionComponent = () => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation<Nav>();
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['50%'], []);
   const [loaded, setLoaded] = useState(false);
@@ -52,7 +67,7 @@ export const Create: FunctionComponent = () => {
     await launchCamera(options, response => setImage(response));
   };
 
-  const handleUpload = async () => {
+  const handlePhotoLibrary = async () => {
     const options: ImageLibraryOptions = {
       selectionLimit: 0,
       mediaType: 'photo',
@@ -61,6 +76,17 @@ export const Create: FunctionComponent = () => {
     };
     await launchImageLibrary(options, response => setImage(response));
   };
+
+  useEffect(() => {
+    if (!image?.assets) {
+      return;
+    }
+    setLoaded(false);
+    navigation.navigate('AddNewDocument', {
+      uri: image?.assets[0].uri,
+      fileName: image?.assets[0].fileName,
+    });
+  }, [navigation, image, image?.assets]);
 
   return (
     <>
@@ -138,7 +164,7 @@ export const Create: FunctionComponent = () => {
                     </Text>
                   </Button>
                 </HStack>
-                <Pressable width="100%" onPress={() => handleUpload()}>
+                <Pressable width="100%" onPress={() => handlePhotoLibrary()}>
                   {({isPressed}) => (
                     <HStack
                       background="#F6F8FA"
