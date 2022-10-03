@@ -1,4 +1,10 @@
-import React, {FunctionComponent, useMemo, useRef, useState} from 'react';
+import React, {
+  FunctionComponent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {Portal, PortalHost} from '@gorhom/portal';
 import BottomSheet, {
   BottomSheetBackdrop,
