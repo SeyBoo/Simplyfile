@@ -19,13 +19,14 @@ import {
   VStack,
 } from 'native-base';
 import {launchCamera} from 'react-native-image-picker';
+import { CameraOptions, ImageLibraryOptions, ImagePickerResponse } from "react-native-image-picker/src/types";
 
 export const Create: FunctionComponent = () => {
   // const navigation = useNavigation();
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['50%'], []);
   const [loaded, setLoaded] = useState(false);
-  // const [image, setImage] = useState('');
+  const [image, setImage] = useState<ImagePickerResponse>();
 
   const handleSnapPress = React.useCallback((index: number) => {
     sheetRef.current?.snapToIndex(index);
@@ -43,12 +44,12 @@ export const Create: FunctionComponent = () => {
   );
 
   const handleCamera = async () => {
-    const options = {
-      saveToPhotos: true,
+    const options: CameraOptions = {
+      saveToPhotos: false,
       mediaType: 'photo',
       includeBase64: false,
     };
-    await launchCamera(options, setImage);
+    await launchCamera(options, response => setImage(response));
   };
 
   return (
