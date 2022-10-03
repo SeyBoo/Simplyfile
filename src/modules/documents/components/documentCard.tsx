@@ -110,7 +110,7 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
             <Text>{moment(document.creationDate).fromNow()}</Text>
           </HStack>
           <HStack justifyContent="space-between" alignItems="center" mt={2}>
-            <Text fontWeight="bold" width="70%" fontSize="lg">
+            <Text fontWeight="bold" width="70%" fontSize="lg" height={10}>
               {document.name}
             </Text>
             <Button
