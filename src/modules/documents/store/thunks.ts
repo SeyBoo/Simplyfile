@@ -1,5 +1,5 @@
 import {AppThunk} from '../../../common/store';
-import {resetDocument, setDocument} from '../../documents/store/slice';
+import {setLastUpdated, setDocument} from '../../documents/store/slice';
 import {getDocumentsBackend} from '../api';
 
 export const fetchDocument =
@@ -30,3 +30,9 @@ export const bookmarkDocument =
     const backendInstance = await getDocumentsBackend();
     await backendInstance.bookmarkDocument(uuid);
   };
+
+export const fetchLastUpdated = (): AppThunk => async dispatch => {
+  const backendInstance = await getDocumentsBackend();
+  const lastUpdated = await backendInstance.fetchLastUpdated();
+  await dispatch(setLastUpdated({lastUpdated}));
+};
