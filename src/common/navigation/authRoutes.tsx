@@ -33,6 +33,8 @@ export const AuthRoutes: FunctionComponent = () => {
     );
   };
 
+  const CreateScreen = () => null;
+
   return (
     <Tab.Navigator
       initialRouteName="NestedHome"
@@ -58,7 +60,7 @@ export const AuthRoutes: FunctionComponent = () => {
       />
       <Tab.Screen
         name="Create"
-        component={() => null}
+        component={CreateScreen}
         options={{tabBarButton: () => <Create />}}
       />
     </Tab.Navigator>

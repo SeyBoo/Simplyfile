@@ -45,7 +45,10 @@ export const Directory: FunctionComponent<
   }
 
   return (
-    <PageLayout title={directory.metadata.name} subtitle="directory">
+    <PageLayout
+      title={directory.metadata.name}
+      subtitle="directory"
+      refetch={handleFetchDirectory}>
       <DocumentsList
         documents={directory.documents}
         handleFetchDirectory={handleFetchDirectory}

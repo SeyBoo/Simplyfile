@@ -20,6 +20,7 @@ import {loginWithEmailPassword} from '../../../modules/auth/store/thunks';
 import FormControl from '../../../common/components/formControl';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {PublicStackParamList} from '../../../common/navigation/publicRoutes';
+import {Platform} from 'react-native';
 
 type Error = 'IUP' | null;
 
@@ -55,8 +56,10 @@ export const Login: FunctionComponent<
   }, [error]);
 
   return (
-    <ScrollView backgroundColor="#F6F6F6">
-      <KeyboardAvoidingView>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{flex: 1}}>
+      <ScrollView backgroundColor="#F6F6F6">
         <HStack mt={12} alignItems="center" ml="5%">
           <Text fontSize="3xl" fontWeight="bold">
             Simplyfile
@@ -146,7 +149,7 @@ export const Login: FunctionComponent<
             </Button>
           </VStack>
         </Center>
-      </KeyboardAvoidingView>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
