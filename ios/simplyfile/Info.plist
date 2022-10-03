@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Simplyfile need access to add your documents.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Simplyfile need access to save your documents.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
