@@ -31,8 +31,8 @@ export const bookmarkDocument =
     await backendInstance.bookmarkDocument(uuid);
   };
 
-export const fetchLastUpdated = (): AppThunk => async dispatch => {
+export const fetchDocuments = (): AppThunk => async dispatch => {
   const backendInstance = await getDocumentsBackend();
-  const lastUpdated = await backendInstance.fetchLastUpdated();
+  const lastUpdated = await backendInstance.fetchDocuments();
   await dispatch(setLastUpdated({lastUpdated}));
 };

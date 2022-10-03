@@ -68,7 +68,7 @@ export default class DocumentDummy implements DocumentsBackend {
     global.documents = documentsList;
   }
 
-  async fetchLastUpdated(): Promise<Document[]> {
+  async fetchDocuments(): Promise<Document[]> {
     return await global.documents;
   }
 }

@@ -4,7 +4,7 @@ import PageLayout from '../../common/layouts/pageLayout';
 import DirectoriesList from '../../modules/directories/components/directoriesList';
 import {useAppDispatch, useAppSelector} from '../../common/hooks/store';
 import {fetchDirectories} from '../../modules/directories/store/thunks';
-import {fetchLastUpdated} from '../../modules/documents/store/thunks';
+import {fetchDocuments} from '../../modules/documents/store/thunks';
 import DocumentCard from '../../modules/documents/components/documentCard';
 
 export const Home: FunctionComponent = () => {
@@ -14,7 +14,7 @@ export const Home: FunctionComponent = () => {
 
   const handleFetchLastUpdated = useCallback(async () => {
     try {
-      await dispatch(fetchLastUpdated());
+      await dispatch(fetchDocuments());
     } catch (e) {
       console.log(e);
     }
