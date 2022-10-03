@@ -11,7 +11,6 @@ import {
   HStack,
   Image,
   Input,
-  ScrollView,
   Spinner,
   Text,
 } from 'native-base';
@@ -30,6 +29,7 @@ import AcceptChangeIcon from '../../common/assets/icon/accept-change.png';
 import {useNavigation} from '@react-navigation/native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import {Alert, PermissionsAndroid, Platform} from 'react-native';
+import BaseLayout from '../../common/layouts/baseLayout';
 
 export const Document: FunctionComponent<
   NativeStackScreenProps<AuthStackParamList, 'Document'>
@@ -98,7 +98,7 @@ export const Document: FunctionComponent<
     return <Spinner />;
   }
   return (
-    <ScrollView mt="17.5%">
+    <BaseLayout>
       <HStack justifyContent="space-between" px="3%" mb="2.5%">
         <Button
           background="transparent"
@@ -167,6 +167,6 @@ export const Document: FunctionComponent<
           />
         </Box>
       </Center>
-    </ScrollView>
+    </BaseLayout>
   );
 };

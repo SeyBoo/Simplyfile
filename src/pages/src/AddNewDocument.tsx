@@ -1,21 +1,13 @@
 import React, {FunctionComponent, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AuthStackParamList} from '../../common/navigation/authRoutes';
-import {
-  Box,
-  Button,
-  Center,
-  HStack,
-  Image,
-  Input,
-  ScrollView,
-  Text,
-} from 'native-base';
+import {Box, Button, Center, HStack, Image, Input, Text} from 'native-base';
 import ArrowBack from '../../common/assets/icon/arrow-square-left.png';
 import AcceptChangeIcon from '../../common/assets/icon/accept-change.png';
 import {useNavigation} from '@react-navigation/native';
 import {useAppDispatch} from '../../common/hooks/store';
 import {addNewDocument} from '../../modules/documents/store/thunks';
+import BaseLayout from '../../common/layouts/baseLayout';
 
 export const AddNewDocument: FunctionComponent<
   NativeStackScreenProps<AuthStackParamList, 'AddNewDocument'>
@@ -35,7 +27,7 @@ export const AddNewDocument: FunctionComponent<
   };
 
   return (
-    <ScrollView mt="17.5%">
+    <BaseLayout>
       <HStack justifyContent="space-between" px="3%" mb="2.5%">
         <Button
           background="transparent"
@@ -84,6 +76,6 @@ export const AddNewDocument: FunctionComponent<
           />
         </Box>
       </Center>
-    </ScrollView>
+    </BaseLayout>
   );
 };
