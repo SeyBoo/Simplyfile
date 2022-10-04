@@ -14,8 +14,8 @@ export const AddNewDocument: FunctionComponent<
 > = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
-  const {uri, fileName} = route.params;
-  const [name, setName] = useState(fileName);
+  const {uri} = route.params;
+  const [name, setName] = useState('');
 
   const handleUpload = async () => {
     try {
