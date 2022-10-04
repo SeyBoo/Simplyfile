@@ -11,6 +11,11 @@ export const Home: FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const directories = useAppSelector(state => state.directories.directories);
   const lastUpdated = useAppSelector(state => state.documents.lastUpdated);
+  const lastUpdatedSorted = lastUpdated
+    ? [...lastUpdated].sort(
+        (a, b) => b.lastUpdate.valueOf() - a.lastUpdate.valueOf(),
+      )
+    : null;
 
   const handleFetchLastUpdated = useCallback(async () => {
     try {
@@ -83,8 +88,8 @@ export const Home: FunctionComponent = () => {
         </Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <HStack ml={-4} space={5}>
-            {lastUpdated &&
-              lastUpdated.map(document => (
+            {lastUpdatedSorted &&
+              lastUpdatedSorted.map(document => (
                 <DocumentCard
                   document={document}
                   key={document.uuid}
