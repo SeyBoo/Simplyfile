@@ -11,7 +11,7 @@ export type AuthStackParamList = {
   Home: undefined;
   Directory: {uuid: string};
   Document: {uuid: string; directoryUuid: string};
-  AddNewDocument: {fileName: string; uri: string};
+  AddNewDocument: {uri: string};
   Create: undefined;
 };
 

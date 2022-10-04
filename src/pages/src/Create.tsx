@@ -100,7 +100,6 @@ export const Create: FunctionComponent = () => {
     setLoaded(false);
     navigation.navigate('AddNewDocument', {
       uri: image?.assets[0].uri,
-      fileName: image?.assets[0].fileName,
     });
   }, [navigation, image, image?.assets]);
 
