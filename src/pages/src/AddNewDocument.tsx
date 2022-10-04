@@ -37,14 +37,16 @@ export const AddNewDocument: FunctionComponent<
           onPress={() => navigation.goBack()}>
           <Image source={ArrowBack} alt="Go Back" />
         </Button>
-        <Button
-          background="transparent"
-          _pressed={{
-            opacity: 0.5,
-          }}
-          onPress={() => handleUpload()}>
-          <Image source={AcceptChangeIcon} alt="Accept icon" size={7} />
-        </Button>
+        {name !== '' && (
+          <Button
+            background="transparent"
+            _pressed={{
+              opacity: 0.5,
+            }}
+            onPress={() => handleUpload()}>
+            <Image source={AcceptChangeIcon} alt="Accept icon" size={7} />
+          </Button>
+        )}
       </HStack>
       <Center>
         <Image
