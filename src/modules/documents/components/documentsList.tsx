@@ -17,7 +17,10 @@ const DocumentsList: FunctionComponent<DocumentsListProps> = ({
   }
 
   return (
-    <HStack flexWrap="wrap" ml="-4" pb="30%">
+    <HStack
+      flexWrap="wrap"
+      justifyContent="space-between"
+    >
       {documents.map(document => (
         <DocumentCard
           document={document}

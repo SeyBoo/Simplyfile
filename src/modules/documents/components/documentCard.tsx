@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
 import {Document} from '../../../common/types/documents.interface';
-import {Box, Button, Card, HStack, Icon, Image, Text} from 'native-base';
+import {Box, Button, HStack, Icon, Image, Text} from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import {ActionSheetIOS, Alert, Platform} from 'react-native';
@@ -90,7 +90,7 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
   return (
     <Button
       background="transparent"
-      p={0}
+      width="150px"
       _pressed={{
         opacity: 0.5,
       }}
@@ -98,41 +98,39 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
         navigation.navigate('Document', {uuid, directoryUuid: directory})
       }
       onLongPress={() => handleLongPress()}>
-      <Card width="200px">
-        <Image
-          source={{uri: document.image}}
-          borderTopRadius="xl"
-          height="175px"
-          alt={document.name}
-        />
-        <Box backgroundColor="white" borderBottomRadius="xl" p={3}>
-          <HStack justifyContent="space-between" alignItems="center">
-            <Text>{moment(document.creationDate).fromNow()}</Text>
-          </HStack>
-          <HStack justifyContent="space-between" alignItems="center" mt={2}>
-            <Text fontWeight="bold" width="70%" fontSize="lg" height={10}>
-              {document.name}
-            </Text>
-            <Button
-              background="transparent"
-              width={'1/2'}
-              _pressed={{
-                opacity: 0.5,
-              }}
-              onPress={() => handleBookmark()}>
-              <Icon
-                size="6"
-                color="black"
-                as={
-                  <MaterialIcons
-                    name={document.bookmarked ? 'bookmark' : 'bookmark-border'}
-                  />
-                }
-              />
-            </Button>
-          </HStack>
-        </Box>
-      </Card>
+      <Image
+        source={{uri: document.image}}
+        borderTopRadius="xl"
+        height="175px"
+        alt={document.name}
+      />
+      <Box backgroundColor="white" borderBottomRadius="xl" p={3}>
+        <HStack justifyContent="space-between" alignItems="center">
+          <Text>{moment(document.creationDate).fromNow()}</Text>
+        </HStack>
+        <HStack justifyContent="space-between" alignItems="center" mt={2}>
+          <Text fontWeight="bold" width="70%" fontSize="lg" height={10}>
+            {document.name}
+          </Text>
+          <Button
+            background="transparent"
+            width={'1/2'}
+            _pressed={{
+              opacity: 0.5,
+            }}
+            onPress={() => handleBookmark()}>
+            <Icon
+              size="6"
+              color="black"
+              as={
+                <MaterialIcons
+                  name={document.bookmarked ? 'bookmark' : 'bookmark-border'}
+                />
+              }
+            />
+          </Button>
+        </HStack>
+      </Box>
     </Button>
   );
 };

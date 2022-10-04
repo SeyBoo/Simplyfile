@@ -87,7 +87,7 @@ export const Home: FunctionComponent = () => {
           Last updated
         </Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <HStack ml={-4} space={5}>
+          <HStack space="7.5%">
             {lastUpdatedSorted &&
               lastUpdatedSorted.map(document => (
                 <DocumentCard

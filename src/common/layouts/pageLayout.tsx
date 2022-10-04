@@ -19,8 +19,9 @@ const PageLayout: FunctionComponent<PropsWithChildren<PageLayoutInterface>> = ({
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{flex: 1}}>
       <ScrollView
-        pl="10%"
         pt="17.5%"
+        pr="5%"
+        pl="5%"
         background="#F6F6F6"
         refreshControl={
           <RefreshControl refreshing={false} onRefresh={() => refetch()} />
