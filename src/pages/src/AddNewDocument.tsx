@@ -1,25 +1,39 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, { FunctionComponent, useEffect, useState } from "react";
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AuthStackParamList} from '../../common/navigation/authRoutes';
-import {Box, Button, Center, HStack, Image, Input, Text} from 'native-base';
+import { Box, Button, Center, HStack, Image, Input, Text, Select, CheckIcon } from "native-base";
 import ArrowBack from '../../common/assets/icon/arrow-square-left.png';
 import AcceptChangeIcon from '../../common/assets/icon/accept-change.png';
 import {useNavigation} from '@react-navigation/native';
-import {useAppDispatch} from '../../common/hooks/store';
+import { useAppDispatch, useAppSelector } from "../../common/hooks/store";
 import {addNewDocument} from '../../modules/documents/store/thunks';
 import BaseLayout from '../../common/layouts/baseLayout';
+import { fetchDirectories } from "../../modules/directories/store/thunks";
 
 export const AddNewDocument: FunctionComponent<
   NativeStackScreenProps<AuthStackParamList, 'AddNewDocument'>
 > = ({route}) => {
   const navigation = useNavigation();
-  const dispatch = useAppDispatch();
   const {uri} = route.params;
+  const dispatch = useAppDispatch();
+  const directories = useAppSelector(state => state.directories.directories);
+
   const [name, setName] = useState('');
+  const [directory, setDirectory] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await dispatch(fetchDirectories());
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, [dispatch]);
 
   const handleUpload = async () => {
     try {
-      await dispatch(addNewDocument(name, uri));
+      await dispatch(addNewDocument(name, uri, directory));
       navigation.goBack();
     } catch (e) {
       console.error(e);
@@ -37,7 +51,7 @@ export const AddNewDocument: FunctionComponent<
           onPress={() => navigation.goBack()}>
           <Image source={ArrowBack} alt="Go Back" />
         </Button>
-        {name !== '' && (
+        {name !== '' && directory && (
           <Button
             background="transparent"
             _pressed={{
@@ -48,7 +62,7 @@ export const AddNewDocument: FunctionComponent<
           </Button>
         )}
       </HStack>
-      <Center>
+      <Center pb="10%">
         <Image
           source={{uri}}
           style={{
@@ -76,6 +90,30 @@ export const AddNewDocument: FunctionComponent<
             defaultValue={name}
             onChangeText={text => setName(text)}
           />
+        </Box>
+        <Box width="90%" mt="5%" pr="2%">
+          <Text fontSize="xl" mb="2">
+            Directory
+          </Text>
+          <Select
+            selectedValue={directory}
+            p={6}
+            accessibilityLabel="Choose a directory"
+            placeholder="Choose a directory"
+            fontSize="md"
+            _selectedItem={{
+              bg: 'gray.200',
+              endIcon: <CheckIcon size="5" color="#000" />,
+            }}
+            onValueChange={itemValue => setDirectory(itemValue)}>
+            {directories &&
+              directories.map(directoryData => (
+                <Select.Item
+                  label={directoryData.name}
+                  value={directoryData.uuid}
+                />
+              ))}
+          </Select>
         </Box>
       </Center>
     </BaseLayout>

@@ -38,8 +38,8 @@ export const fetchDocuments = (): AppThunk => async dispatch => {
 };
 
 export const addNewDocument =
-  (name: string, uri: string): AppThunk =>
+  (name: string, uri: string, dossierUuid: string): AppThunk =>
   async () => {
     const backendInstance = await getDocumentsBackend();
-    await backendInstance.addDocument(name, uri);
+    await backendInstance.addDocument(name, uri, dossierUuid);
   };

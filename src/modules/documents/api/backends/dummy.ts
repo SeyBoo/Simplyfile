@@ -12,7 +12,11 @@ export default class DocumentDummy implements DocumentsBackend {
     return selectedDocument[0];
   }
 
-  async addDocument(name: string, uri: string): Promise<void> {
+  async addDocument(
+    name: string,
+    uri: string,
+    dossierUuid: string,
+  ): Promise<void> {
     const newDocument: Document = {
       name: name,
       bookmarked: false,
@@ -20,7 +24,7 @@ export default class DocumentDummy implements DocumentsBackend {
       creationDate: new Date(),
       uuid: name,
       image: uri,
-      directory: 'uuid-0',
+      directory: dossierUuid,
     };
     const documents = [...global.documents, newDocument];
     global.documents = documents;

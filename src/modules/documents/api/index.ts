@@ -13,7 +13,7 @@ export interface DocumentsBackend {
 
   fetchDocuments(): Promise<Document[]>;
 
-  addDocument(name: string, uri: string): Promise<void>;
+  addDocument(name: string, uri: string, dossierUuid: string): Promise<void>;
 }
 
 let authBackendInstance: DocumentsBackend | undefined;
