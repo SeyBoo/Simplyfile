@@ -31,6 +31,7 @@ import {
   ImagePickerResponse,
 } from 'react-native-image-picker/src/types';
 import {useNavigation} from '@react-navigation/native';
+import DocumentScanner from 'react-native-document-scanner-plugin'
 
 type Nav = {
   navigate: (value: string, arg1: any) => void;
@@ -75,6 +76,21 @@ export const Create: FunctionComponent = () => {
       includeExtra: false,
     };
     await launchImageLibrary(options, response => setImage(response));
+  };
+
+  const scanDocument = async () => {
+    const {scannedImages} = await DocumentScanner.scanDocument();
+
+    if (scannedImages && scannedImages.length > 0) {
+      const formattedImagePayload: ImagePickerResponse = {
+        assets: [
+          {
+            uri: scannedImages[0],
+          },
+        ],
+      };
+      setImage(formattedImagePayload);
+    }
   };
 
   useEffect(() => {
@@ -147,7 +163,9 @@ export const Create: FunctionComponent = () => {
                     borderRadius="lg"
                     _pressed={{
                       opacity: 0.5,
-                    }}>
+                    }}
+                    onPress={() => scanDocument()}
+                  >
                     <Image
                       source={ScanIcon}
                       alt="#"
