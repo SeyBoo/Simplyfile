@@ -1,4 +1,4 @@
 export interface UserInfo {
-  name: string | null;
-  email: string;
+	name: string | null;
+	email: string;
 }

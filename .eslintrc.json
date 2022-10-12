@@ -1,0 +1,34 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "semi": "warn",
+    "indent": [
+      "warn",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "comma-dangle": [
+      "warn",
+      "always-multiline"
+    ],
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "object-curly-spacing": [
+      "warn",
+      "always"
+    ],
+    "eol-last": "warn",
+    "no-trailing-spaces": "warn",
+    "no-var": "warn",
+    "react/jsx-tag-spacing": [
+      "warn",
+      {
+        "beforeSelfClosing": "always"
+      }
+    ]
+  }
+}
