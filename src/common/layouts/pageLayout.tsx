@@ -5,7 +5,7 @@ import { Box, ScrollView, Text, VStack } from "native-base";
 interface PageLayoutInterface {
 	title: string;
 	subtitle?: string;
-	refetch: () => void;
+	refetch: () => Promise<void>;
 }
 
 const PageLayout: FunctionComponent<PropsWithChildren<PageLayoutInterface>> = ({
@@ -25,7 +25,10 @@ const PageLayout: FunctionComponent<PropsWithChildren<PageLayoutInterface>> = ({
 				pl="5%"
 				background="#F6F6F6"
 				refreshControl={
-					<RefreshControl refreshing={false} onRefresh={() => refetch()} />
+					<RefreshControl
+						refreshing={false}
+						onRefresh={async () => refetch()}
+					/>
 				}
 			>
 				<Box>

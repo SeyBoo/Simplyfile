@@ -21,26 +21,28 @@ export const Home: FunctionComponent = () => {
 		}
 	}, [dispatch]);
 
+	const handleFetchDirectories = useCallback(async () => {
+		try {
+			await dispatch(fetchDirectories());
+		} catch (e) {
+			console.log(e);
+		}
+	}, [dispatch]);
+
+	const handleFetchHomeData = async () => {
+		await handleFetchLastUpdated();
+		await handleFetchDirectories();
+	};
+
 	useEffect(() => {
-		if (directories === null) {
-			(async () => {
-				try {
-					await dispatch(fetchDirectories());
-				} catch (e) {
-					console.log(e);
-				}
-			})();
-		}
-		if (lastUpdated === null) {
-			(async () => await handleFetchLastUpdated())();
-		}
-	}, [handleFetchLastUpdated, lastUpdated, directories, dispatch]);
+		async () => handleFetchHomeData();
+	}, [handleFetchHomeData]);
 
 	return (
 		<PageLayout
 			title="Search"
 			subtitle="for your files"
-			refetch={() => handleFetchLastUpdated()}
+			refetch={async () => handleFetchHomeData()}
 		>
 			{/*<HStack*/}
 			{/*    mt="7.5%"*/}
