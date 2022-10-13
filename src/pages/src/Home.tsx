@@ -42,7 +42,7 @@ export const Home: FunctionComponent = () => {
 		<PageLayout
 			title="Search"
 			subtitle="for your files"
-			refetch={async () => handleFetchHomeData()}
+			refetch={handleFetchHomeData}
 		>
 			{/*<HStack*/}
 			{/*    mt="7.5%"*/}
