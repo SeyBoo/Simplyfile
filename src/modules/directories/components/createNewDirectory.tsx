@@ -5,7 +5,7 @@ import React, { FunctionComponent } from "react";
 import { useAppDispatch } from "../../../common/hooks/store";
 import { createDirectory } from "../store/thunks";
 
-const AddDirectory: FunctionComponent = () => {
+const CreateNewDirectory: FunctionComponent = () => {
 	const dispatch = useAppDispatch();
 
 	const handleAddNewDirectory = async (name: string) => {
@@ -65,4 +65,4 @@ const AddDirectory: FunctionComponent = () => {
 	);
 };
 
-export default AddDirectory;
+export default CreateNewDirectory;
