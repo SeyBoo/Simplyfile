@@ -41,7 +41,7 @@ export const Create: FunctionComponent = () => {
 	const navigation = useNavigation<CreateNav>();
 	const sheetRef = useRef<BottomSheet>(null);
 	const snapPoints = useMemo(() => ["50%"], []);
-	const [loaded, setLoaded] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 	const [image, setImage] = useState<ImagePickerResponse>();
 
 	const handleSnapPress = React.useCallback((index: number) => {
@@ -97,7 +97,7 @@ export const Create: FunctionComponent = () => {
 		if (!image?.assets) {
 			return;
 		}
-		setLoaded(false);
+		setShowModal(false);
 		navigation.navigate("AddNewDocument", {
 			uri: image?.assets[0].uri,
 		});
@@ -108,13 +108,13 @@ export const Create: FunctionComponent = () => {
 			<Button
 				background="transparent"
 				onPress={() => {
-					setLoaded(true);
+					setShowModal(true);
 					handleSnapPress(0);
 				}}
 			>
 				<Image source={CreateIconInActive} alt="#" />
 			</Button>
-			{loaded === true ? (
+			{showModal === true ? (
 				<Portal>
 					<BottomSheet
 						ref={sheetRef}
