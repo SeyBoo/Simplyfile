@@ -1,5 +1,3 @@
-import { HStack, ScrollView } from "native-base";
-import AddDirectory from "./addDirectory";
 import DirectoryCard from "./directoryCard";
 import React, { FunctionComponent } from "react";
 import { DirectoryMetadata } from "../../../common/types/directory.interface";
@@ -15,20 +13,13 @@ const DirectoriesList: FunctionComponent<DirectoryListProps> = ({
 		return null;
 	}
 
-	return (
-		<ScrollView horizontal showsHorizontalScrollIndicator={false} mt={5}>
-			<HStack>
-				<AddDirectory />
-				{directories?.map((directory) => (
-					<DirectoryCard
-						name={directory.name}
-						key={directory.uuid}
-						uuid={directory.uuid}
-					/>
-				))}
-			</HStack>
-		</ScrollView>
-	);
+	return directories?.map((directory) => (
+		<DirectoryCard
+			name={directory.name}
+			key={directory.uuid}
+			uuid={directory.uuid}
+		/>
+	));
 };
 
 export default DirectoriesList;

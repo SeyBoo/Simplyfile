@@ -81,7 +81,12 @@ export const Home: FunctionComponent = () => {
 				<Text fontSize="3xl" fontWeight="bold" mt={10}>
 					Directory
 				</Text>
-				<DirectoriesList directories={directories} />
+				<ScrollView horizontal showsHorizontalScrollIndicator={false} mt={5}>
+					<HStack>
+						<CreateNewDirectory />
+						<DirectoriesList directories={directories} />
+					</HStack>
+				</ScrollView>
 			</Box>
 			<Box mt={10} mb="30%">
 				<Text fontSize="3xl" fontWeight="bold">
