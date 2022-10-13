@@ -11,12 +11,12 @@ interface DirectoryProps {
 	uuid: string;
 }
 
-type Nav = {
-	navigate: (value: string, arg1: any) => void;
+type DirectoryNav = {
+	navigate: (value: string, arg1: string[]) => void;
 };
 
 const DirectoryCard: FunctionComponent<DirectoryProps> = ({ name, uuid }) => {
-	const navigation = useNavigation<Nav>();
+	const navigation = useNavigation<DirectoryNav>();
 	const dispatch = useAppDispatch();
 
 	const handleRenameModal = () => {
