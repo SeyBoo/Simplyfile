@@ -35,7 +35,7 @@ export const Home: FunctionComponent = () => {
 	};
 
 	useEffect(() => {
-		async () => handleFetchHomeData();
+		(async () => handleFetchHomeData())();
 	}, [handleFetchHomeData]);
 
 	return (
