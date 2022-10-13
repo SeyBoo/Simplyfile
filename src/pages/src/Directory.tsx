@@ -16,7 +16,6 @@ export const Directory: FunctionComponent<
 		(state) => state.directories.currentDirectory
 	);
 	const currentDocument = useAppSelector((state) => state.documents.document);
-
 	const handleFetchDirectory = useCallback(async () => {
 		try {
 			await dispatch(fetchDirectory(uuid));
@@ -27,12 +26,8 @@ export const Directory: FunctionComponent<
 
 	useEffect(() => {
 		(async () => {
+			await handleFetchDirectory();
 			// Force to refresh if the current document state change
-			if (currentDocument === null) {
-				await handleFetchDirectory();
-			} else {
-				await handleFetchDirectory();
-			}
 		})();
 	}, [
 		directory?.metadata.uuid,
