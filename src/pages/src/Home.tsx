@@ -4,22 +4,18 @@ import PageLayout from "../../common/layouts/pageLayout";
 import DirectoriesList from "../../modules/directories/components/directoriesList";
 import { useAppDispatch, useAppSelector } from "../../common/hooks/store";
 import { fetchDirectories } from "../../modules/directories/store/thunks";
-import { fetchDocuments } from "../../modules/documents/store/thunks";
+import { fetchLastUpdatedDocuments } from "../../modules/documents/store/thunks";
 import DocumentCard from "../../modules/documents/components/documentCard";
+import CreateNewDirectory from "../../modules/directories/components/createNewDirectory";
 
 export const Home: FunctionComponent = () => {
 	const dispatch = useAppDispatch();
 	const directories = useAppSelector((state) => state.directories.directories);
 	const lastUpdated = useAppSelector((state) => state.documents.lastUpdated);
-	const lastUpdatedSorted = lastUpdated
-		? [...lastUpdated].sort(
-				(a, b) => b.lastUpdate.valueOf() - a.lastUpdate.valueOf()
-		  )
-		: null;
 
 	const handleFetchLastUpdated = useCallback(async () => {
 		try {
-			await dispatch(fetchDocuments());
+			await dispatch(fetchLastUpdatedDocuments());
 		} catch (e) {
 			console.log(e);
 		}
@@ -94,8 +90,8 @@ export const Home: FunctionComponent = () => {
 				</Text>
 				<ScrollView horizontal showsHorizontalScrollIndicator={false}>
 					<HStack space="7.5%">
-						{lastUpdatedSorted &&
-							lastUpdatedSorted.map((document) => (
+						{lastUpdated &&
+							lastUpdated.map((document) => (
 								<DocumentCard
 									document={document}
 									key={document.uuid}

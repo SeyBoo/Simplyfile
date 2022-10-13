@@ -14,6 +14,8 @@ export interface DocumentsBackend {
   fetchDocuments(): Promise<Document[]>;
 
   addDocument(name: string, uri: string, dossierUuid: string): Promise<void>;
+
+  fetchLastUpdatedDocuments(): Promise<Document[]>;
 }
 
 let authBackendInstance: DocumentsBackend | undefined;

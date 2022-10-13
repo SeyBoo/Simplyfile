@@ -90,4 +90,9 @@ export default class DocumentDummy implements DocumentsBackend {
 		return await global.documents;
 	}
 
+	async fetchLastUpdatedDocuments(): Promise<Document[]> {
+		return await global.documents.sort(
+			(a, b) => b.lastUpdate.valueOf() - a.lastUpdate.valueOf()
+		);
+	}
 }
