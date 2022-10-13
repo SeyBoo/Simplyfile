@@ -12,7 +12,7 @@ interface DirectoryProps {
 }
 
 type DirectoryNav = {
-	navigate: (value: string, arg1: string[]) => void;
+	navigate: (value: string, arg1: { name: string; uuid: string }) => void;
 };
 
 const DirectoryCard: FunctionComponent<DirectoryProps> = ({ name, uuid }) => {

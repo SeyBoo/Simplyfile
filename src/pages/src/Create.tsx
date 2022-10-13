@@ -33,12 +33,12 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import DocumentScanner from "react-native-document-scanner-plugin";
 
-type Nav = {
-	navigate: (value: string, arg1: any) => void;
+type CreateNav = {
+	navigate: (value: string, arg1: { uri: string }) => void;
 };
 
 export const Create: FunctionComponent = () => {
-	const navigation = useNavigation<Nav>();
+	const navigation = useNavigation<CreateNav>();
 	const sheetRef = useRef<BottomSheet>(null);
 	const snapPoints = useMemo(() => ["50%"], []);
 	const [loaded, setLoaded] = useState(false);

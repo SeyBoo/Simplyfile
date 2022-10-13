@@ -17,8 +17,11 @@ interface DocumentCardProps {
   handleRefetch: () => Promise<void>;
 }
 
-type Nav = {
-  navigate: (value: string, arg1: any) => void;
+type DocumentNav = {
+	navigate: (
+		value: string,
+		arg1: { uuid: string; directoryUuid: string }
+	) => void;
 };
 
 const DocumentCard: FunctionComponent<DocumentCardProps> = ({
@@ -28,6 +31,7 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
   const dispatch = useAppDispatch();
   const navigation = useNavigation<Nav>();
   const {uuid, directory} = document;
+	const navigation = useNavigation<DocumentNav>();
 
   const handleRename = async (text: string) => {
     await dispatch(updateDocumentName(uuid, text));
