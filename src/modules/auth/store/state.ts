@@ -1,5 +1,5 @@
 import { UserInfo } from '../../../common/types/user.interface';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type User = UserInfo | null;
 

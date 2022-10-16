@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import initialState, { UserInfoLocalStorageName } from './state';
 import { UserInfo } from '../../../common/types/user.interface';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface LoginPayload {
 	user: UserInfo;
