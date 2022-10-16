@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Image } from "native-base";
-import { Directory, Home, Document, Create, AddNewDocument } from "../../pages";
-import HomeActive from "../assets/bottom-tabs/active/home.png";
-import HomeInActive from "../assets/bottom-tabs/inactive/home.png";
-import { createStackNavigator } from "@react-navigation/stack";
+import React, { FunctionComponent } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Image } from 'native-base';
+import { Directory, Home, Document, Create, AddNewDocument } from '../../pages';
+import HomeActive from '../assets/bottom-tabs/active/home.png';
+import HomeInActive from '../assets/bottom-tabs/inactive/home.png';
+import { createStackNavigator } from '@react-navigation/stack';
 
 export type AuthStackParamList = {
 	NestedHome: undefined;
@@ -53,9 +53,9 @@ export const AuthRoutes: FunctionComponent = () => {
 				options={{
 					tabBarIcon: ({ focused }) =>
 						focused ? (
-							<Image source={HomeActive} alt={"home active"} />
+							<Image source={HomeActive} alt={'home active'} />
 						) : (
-							<Image source={HomeInActive} alt={"home inactive"} />
+							<Image source={HomeInActive} alt={'home inactive'} />
 						),
 					headerShown: false,
 				}}

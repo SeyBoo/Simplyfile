@@ -1,9 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import initialState from "./state";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import initialState from './state';
 import {
 	Directory,
 	DirectoryMetadata,
-} from "../../../common/types/directory.interface";
+} from '../../../common/types/directory.interface';
 
 interface SetDirectoriesPayload {
 	directories: DirectoryMetadata[];
@@ -18,7 +18,7 @@ interface SelectDirectoryPayload {
 }
 
 const DirectoriesSlice = createSlice({
-	name: "directories",
+	name: 'directories',
 	initialState,
 	reducers: {
 		setDirectories: (state, action: PayloadAction<SetDirectoriesPayload>) => {

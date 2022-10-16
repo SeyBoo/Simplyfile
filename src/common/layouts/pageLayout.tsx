@@ -1,6 +1,6 @@
-import React, { PropsWithChildren, FunctionComponent } from "react";
-import { KeyboardAvoidingView, Platform, RefreshControl } from "react-native";
-import { Box, ScrollView, Text, VStack } from "native-base";
+import React, { PropsWithChildren, FunctionComponent } from 'react';
+import { KeyboardAvoidingView, Platform, RefreshControl } from 'react-native';
+import { Box, ScrollView, Text, VStack } from 'native-base';
 
 interface PageLayoutInterface {
 	title: string;
@@ -16,7 +16,7 @@ const PageLayout: FunctionComponent<PropsWithChildren<PageLayoutInterface>> = ({
 }) => {
 	return (
 		<KeyboardAvoidingView
-			behavior={Platform.OS === "ios" ? "padding" : "height"}
+			behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 			style={{ flex: 1 }}
 		>
 			<ScrollView

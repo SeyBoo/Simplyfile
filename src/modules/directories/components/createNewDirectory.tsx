@@ -1,9 +1,9 @@
-import { Alert, Platform } from "react-native";
-import { Box, Button, HStack, Icon, Text } from "native-base";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import React, { FunctionComponent } from "react";
-import { useAppDispatch } from "../../../common/hooks/store";
-import { createDirectory } from "../store/thunks";
+import { Alert, Platform } from 'react-native';
+import { Box, Button, HStack, Icon, Text } from 'native-base';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import React, { FunctionComponent } from 'react';
+import { useAppDispatch } from '../../../common/hooks/store';
+import { createDirectory } from '../store/thunks';
 
 const CreateNewDirectory: FunctionComponent = () => {
 	const dispatch = useAppDispatch();
@@ -17,14 +17,14 @@ const CreateNewDirectory: FunctionComponent = () => {
 	};
 
 	const handlePress = () => {
-		if (Platform.OS === "ios") {
+		if (Platform.OS === 'ios') {
 			Alert.prompt(
-				"Add New Directory",
-				"",
+				'Add New Directory',
+				'',
 				[
-					{ text: "Cancel", style: "cancel" },
+					{ text: 'Cancel', style: 'cancel' },
 					{
-						text: "Add",
+						text: 'Add',
 						onPress: (text) => {
 							if (text) {
 								handleAddNewDirectory(text).then(() => {
@@ -34,7 +34,7 @@ const CreateNewDirectory: FunctionComponent = () => {
 						},
 					},
 				],
-				"plain-text"
+				'plain-text'
 			);
 		}
 		// TODO Android
@@ -49,7 +49,7 @@ const CreateNewDirectory: FunctionComponent = () => {
 			borderRadius="lg"
 			mr={5}
 			_pressed={{
-				opacity: ".5",
+				opacity: '.5',
 			}}
 			onPress={() => handlePress()}
 		>

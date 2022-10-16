@@ -1,10 +1,10 @@
-import { DirectoriesBackend } from "../index";
+import { DirectoriesBackend } from '../index';
 import {
 	Directory,
 	DirectoryMetadata,
-} from "../../../../common/types/directory.interface";
-import { dummyDirectoriesMetadata } from "./dummy-data";
-import "../../../documents/api/backends/dummy";
+} from '../../../../common/types/directory.interface';
+import { dummyDirectoriesMetadata } from './dummy-data';
+import '../../../documents/api/backends/dummy';
 
 let directoriesMetadata = dummyDirectoriesMetadata;
 

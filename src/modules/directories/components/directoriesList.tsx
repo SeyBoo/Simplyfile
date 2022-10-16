@@ -1,6 +1,6 @@
-import DirectoryCard from "./directoryCard";
-import React, { FunctionComponent } from "react";
-import { DirectoryMetadata } from "../../../common/types/directory.interface";
+import DirectoryCard from './directoryCard';
+import React, { FunctionComponent } from 'react';
+import { DirectoryMetadata } from '../../../common/types/directory.interface';
 
 interface DirectoryListProps {
 	directories: DirectoryMetadata[] | null;

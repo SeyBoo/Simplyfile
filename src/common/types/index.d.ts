@@ -1,7 +1,7 @@
-import {Document} from './documents.interface';
+import { Document } from './documents.interface';
 
 declare global {
-  var documents: Document[];
+	let documents: Document[];
 }
 
 export {};

@@ -3,7 +3,7 @@ import React, {
 	FunctionComponent,
 	useCallback,
 	useState,
-} from "react";
+} from 'react';
 import {
 	Box,
 	Button,
@@ -13,23 +13,23 @@ import {
 	ScrollView,
 	Text,
 	VStack,
-} from "native-base";
-import { signUpWithEmailPassword } from "../../../modules/auth/store/thunks";
-import { InvalidUsernameOrPassword } from "../../../modules/auth/api/error";
-import { useAppDispatch } from "../../../common/hooks/store";
-import FormControl from "../../../common/components/formControl";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { PublicStackParamList } from "../../../common/navigation/publicRoutes";
-import { Platform } from "react-native";
+} from 'native-base';
+import { signUpWithEmailPassword } from '../../../modules/auth/store/thunks';
+import { InvalidUsernameOrPassword } from '../../../modules/auth/api/error';
+import { useAppDispatch } from '../../../common/hooks/store';
+import FormControl from '../../../common/components/formControl';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { PublicStackParamList } from '../../../common/navigation/publicRoutes';
+import { Platform } from 'react-native';
 
-type Error = "IUP" | "NMP" | null;
+type Error = 'IUP' | 'NMP' | null;
 
 export const Register: FunctionComponent<
-	NativeStackScreenProps<PublicStackParamList, "Register">
+	NativeStackScreenProps<PublicStackParamList, 'Register'>
 > = ({ navigation }) => {
-	const [password, setPassword] = useState<string>("");
-	const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-	const [email, setEmail] = useState<string>("");
+	const [password, setPassword] = useState<string>('');
+	const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+	const [email, setEmail] = useState<string>('');
 	const [error, setError] = useState<Error>(null);
 
 	const dispatch = useAppDispatch();
@@ -43,11 +43,11 @@ export const Register: FunctionComponent<
 					await dispatch(signUpWithEmailPassword(email, password));
 				} catch (e) {
 					if (e instanceof InvalidUsernameOrPassword) {
-						setError("IUP");
+						setError('IUP');
 					}
 				}
 			} else {
-				setError("NMP");
+				setError('NMP');
 			}
 		},
 		[dispatch, email, password, passwordConfirm]
@@ -55,16 +55,16 @@ export const Register: FunctionComponent<
 
 	const getPasswordError = useCallback(() => {
 		switch (error) {
-			case "IUP":
-				return "Invalid email or password";
-			case "NMP":
-				return "Password doesn't match";
+		case 'IUP':
+			return 'Invalid email or password';
+		case 'NMP':
+			return 'Password doesn\'t match';
 		}
 	}, [error]);
 
 	return (
 		<KeyboardAvoidingView
-			behavior={Platform.OS === "ios" ? "padding" : "height"}
+			behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 			style={{ flex: 1 }}
 		>
 			<ScrollView background="#F6F6F6">
@@ -102,20 +102,20 @@ export const Register: FunctionComponent<
 								<FormControl
 									required
 									label="Email"
-									placeholder={"Enter your email"}
+									placeholder={'Enter your email'}
 									onChange={(text) => setEmail(text)}
 								/>
 								<FormControl
 									required
 									label="Password"
-									placeholder={"Enter your password"}
+									placeholder={'Enter your password'}
 									onChange={(text) => setPassword(text)}
 									type="password"
 								/>
 								<FormControl
 									required
 									label="Confirm password"
-									placeholder={"Confirm your password"}
+									placeholder={'Confirm your password'}
 									onChange={(text) => setPasswordConfirm(text)}
 									error={getPasswordError()}
 									type="password"
@@ -125,7 +125,7 @@ export const Register: FunctionComponent<
 						<Button
 							background="#F4F4F4"
 							_pressed={{
-								opacity: ".5",
+								opacity: '.5',
 							}}
 							mt={8}
 							py={4}
@@ -140,12 +140,12 @@ export const Register: FunctionComponent<
 						<Button
 							textAlign="center"
 							mt="8"
-							onPress={() => navigation.navigate("Login")}
+							onPress={() => navigation.navigate('Login')}
 							fontSize="md"
 							color="gray.500"
 							background="transparent"
 							_pressed={{
-								opacity: ".5",
+								opacity: '.5',
 							}}
 						>
 							<HStack>

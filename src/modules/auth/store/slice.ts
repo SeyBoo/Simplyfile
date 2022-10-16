@@ -1,14 +1,14 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import initialState, { UserInfoLocalStorageName } from "./state";
-import { UserInfo } from "../../../common/types/user.interface";
-import { AsyncStorage } from "react-native";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import initialState, { UserInfoLocalStorageName } from './state';
+import { UserInfo } from '../../../common/types/user.interface';
+import { AsyncStorage } from 'react-native';
 
 interface LoginPayload {
 	user: UserInfo;
 }
 
 const userSlice = createSlice({
-	name: "users",
+	name: 'users',
 	initialState,
 	reducers: {
 		setUser: (state, action: PayloadAction<LoginPayload>) => {

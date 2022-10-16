@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent } from 'react';
 import {
 	Box,
 	Button,
@@ -8,13 +8,13 @@ import {
 	ScrollView,
 	Text,
 	VStack,
-} from "native-base";
-import IllustrationSplash from "../../../common/assets/splash-illustration.png";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { PublicStackParamList } from "../../../common/navigation/publicRoutes";
+} from 'native-base';
+import IllustrationSplash from '../../../common/assets/splash-illustration.png';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { PublicStackParamList } from '../../../common/navigation/publicRoutes';
 
 export const Splash: FunctionComponent<
-	NativeStackScreenProps<PublicStackParamList, "Splash">
+	NativeStackScreenProps<PublicStackParamList, 'Splash'>
 > = ({ navigation }) => {
 	return (
 		<ScrollView mb="10%">
@@ -45,9 +45,9 @@ export const Splash: FunctionComponent<
 							borderRadius="2xl"
 							width="50%"
 							_pressed={{
-								opacity: ".9",
+								opacity: '.9',
 							}}
-							onPress={() => navigation.navigate("Register")}
+							onPress={() => navigation.navigate('Register')}
 						>
 							<Text fontWeight="bold" fontSize="xl" px={4} py={2}>
 								Register
@@ -58,9 +58,9 @@ export const Splash: FunctionComponent<
 							borderRadius="2xl"
 							width="50%"
 							_pressed={{
-								opacity: ".2",
+								opacity: '.2',
 							}}
-							onPress={() => navigation.navigate("Login")}
+							onPress={() => navigation.navigate('Login')}
 						>
 							<Text fontWeight="bold" fontSize="xl" color="white" px={4} py={2}>
 								Login

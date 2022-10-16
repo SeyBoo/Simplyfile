@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useCallback, useState } from "react";
-import { Box, HStack, Icon, Input, Text } from "native-base";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import React, { FunctionComponent, useCallback, useState } from 'react';
+import { Box, HStack, Icon, Input, Text } from 'native-base';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 interface FormControlProps {
 	label: string;
@@ -9,7 +9,7 @@ interface FormControlProps {
 	error?: null | string;
 	initialValue?: any;
 	onChange: (value: string) => void;
-	type?: "password";
+	type?: 'password';
 }
 
 const FormControl: FunctionComponent<FormControlProps> = ({
@@ -37,12 +37,12 @@ const FormControl: FunctionComponent<FormControlProps> = ({
 				onChangeText={(text) => onChange(text)}
 				placeholder={placeholder}
 				defaultValue={initialValue}
-				type={type ? (show ? "text" : "password") : "text"}
+				type={type ? (show ? 'text' : 'password') : 'text'}
 				InputRightElement={
 					type && (
 						<Icon
 							as={
-								<MaterialIcons name={show ? "visibility" : "visibility-off"} />
+								<MaterialIcons name={show ? 'visibility' : 'visibility-off'} />
 							}
 							size={5}
 							mr="2"
@@ -62,7 +62,7 @@ const FormControl: FunctionComponent<FormControlProps> = ({
 					{label}
 				</Text>
 				{required && (
-					<Text fontSize="xl" ml="1" mb="2" color={"red.500"}>
+					<Text fontSize="xl" ml="1" mb="2" color={'red.500'}>
 						*
 					</Text>
 				)}
@@ -71,7 +71,7 @@ const FormControl: FunctionComponent<FormControlProps> = ({
 			<Box>{renderInput()}</Box>
 
 			{error && (
-				<Text fontSize="md" mt="2" color={"red.500"}>
+				<Text fontSize="md" mt="2" color={'red.500'}>
 					{error}
 				</Text>
 			)}

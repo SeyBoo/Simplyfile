@@ -1,7 +1,7 @@
 import {
 	Directory,
 	DirectoryMetadata,
-} from "../../../common/types/directory.interface";
+} from '../../../common/types/directory.interface';
 
 interface DirectoriesState {
 	directories: DirectoryMetadata[] | null;

@@ -3,7 +3,7 @@ import React, {
 	useCallback,
 	useEffect,
 	useState,
-} from "react";
+} from 'react';
 import {
 	Box,
 	Button,
@@ -13,32 +13,33 @@ import {
 	Input,
 	Spinner,
 	Text,
-} from "native-base";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { AuthStackParamList } from "../../common/navigation/authRoutes";
-import { useAppDispatch, useAppSelector } from "../../common/hooks/store";
+} from 'native-base';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthStackParamList } from '../../common/navigation/authRoutes';
+import { useAppDispatch, useAppSelector } from '../../common/hooks/store';
 import {
 	deleteDocument,
 	fetchDocument,
 	updateDocumentName,
-} from "../../modules/documents/store/thunks";
-import ArrowBack from "../../common/assets/icon/arrow-square-left.png";
-import ExportIcon from "../../common/assets/icon/export.png";
-import TrashIcon from "../../common/assets/icon/trash.png";
-import AcceptChangeIcon from "../../common/assets/icon/accept-change.png";
-import { useNavigation } from "@react-navigation/native";
-import { CameraRoll } from "@react-native-camera-roll/camera-roll";
-import { Alert, PermissionsAndroid, Platform } from "react-native";
-import BaseLayout from "../../common/layouts/baseLayout";
+} from '../../modules/documents/store/thunks';
+import ArrowBack from '../../common/assets/icon/arrow-square-left.png';
+import ExportIcon from '../../common/assets/icon/export.png';
+import TrashIcon from '../../common/assets/icon/trash.png';
+import AcceptChangeIcon from '../../common/assets/icon/accept-change.png';
+import { useNavigation } from '@react-navigation/native';
+import { CameraRoll } from '@react-native-camera-roll/camera-roll';
+import { Alert, Platform } from 'react-native';
+import BaseLayout from '../../common/layouts/baseLayout';
+import hasAndroidWritePermission from '../../common/utils/getAndroidPermission.ts';
 
 export const Document: FunctionComponent<
-	NativeStackScreenProps<AuthStackParamList, "Document">
+	NativeStackScreenProps<AuthStackParamList, 'Document'>
 > = ({ route }) => {
 	const { uuid } = route.params;
 	const dispatch = useAppDispatch();
 	const document = useAppSelector((state) => state.documents.document);
 	const navigation = useNavigation();
-	const [name, setName] = useState<string>("");
+	const [name, setName] = useState<string>('');
 
 	const handleFetchDocument = useCallback(async () => {
 		try {
@@ -48,26 +49,14 @@ export const Document: FunctionComponent<
 		}
 	}, [dispatch, uuid]);
 
-	async function hasAndroidPermission() {
-		const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
-
-		const hasPermission = await PermissionsAndroid.check(permission);
-		if (hasPermission) {
-			return true;
-		}
-
-		const status = await PermissionsAndroid.request(permission);
-		return status === "granted";
-	}
-
 	async function handleSaveImage() {
-		if (Platform.OS === "android" && !(await hasAndroidPermission())) {
+		if (Platform.OS === 'android' && !(await hasAndroidWritePermission())) {
 			return;
 		}
 
 		if (document) {
 			await CameraRoll.save(document?.image).then(() => {
-				Alert.alert("Successfully saved", "", [{ text: "OK" }]);
+				Alert.alert('Successfully saved', '', [{ text: 'OK' }]);
 			});
 		}
 	}
@@ -110,7 +99,7 @@ export const Document: FunctionComponent<
 					<Image source={ArrowBack} alt={document.name} />
 				</Button>
 				<HStack>
-					{document.name !== name && name !== "" && (
+					{document.name !== name && name !== '' && (
 						<Button
 							background="transparent"
 							_pressed={{
@@ -145,7 +134,7 @@ export const Document: FunctionComponent<
 				<Image
 					source={{ uri: document.image }}
 					style={{
-						width: "90%",
+						width: '90%',
 						height: 400,
 						borderRadius: 15,
 					}}

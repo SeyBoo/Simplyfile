@@ -1,19 +1,21 @@
-import React, { FunctionComponent, useCallback, useEffect } from "react";
-import { Box, HStack, ScrollView, Text } from "native-base";
-import PageLayout from "../../common/layouts/pageLayout";
-import DirectoriesList from "../../modules/directories/components/directoriesList";
-import { useAppDispatch, useAppSelector } from "../../common/hooks/store";
-import { fetchDirectories } from "../../modules/directories/store/thunks";
-import { fetchLastUpdatedDocuments } from "../../modules/documents/store/thunks";
-import DocumentCard from "../../modules/documents/components/documentCard";
-import CreateNewDirectory from "../../modules/directories/components/createNewDirectory";
+import React, { FunctionComponent, useCallback, useEffect } from 'react';
+import { Box, HStack, ScrollView, Text } from 'native-base';
+import PageLayout from '../../common/layouts/pageLayout';
+import DirectoriesList from '../../modules/directories/components/directoriesList';
+import { useAppDispatch, useAppSelector } from '../../common/hooks/store';
+import { fetchDirectories } from '../../modules/directories/store/thunks';
+import { fetchLastUpdatedDocuments } from '../../modules/documents/store/thunks';
+import CreateNewDirectory from '../../modules/directories/components/createNewDirectory';
+import DocumentsList from '../../modules/documents/components/documentsList';
 
 export const Home: FunctionComponent = () => {
 	const dispatch = useAppDispatch();
 	const directories = useAppSelector((state) => state.directories.directories);
-	const lastUpdated = useAppSelector((state) => state.documents.lastUpdated);
+	const lastUpdatedDocuments = useAppSelector(
+		(state) => state.documents.lastUpdated
+	);
 
-	const handleFetchLastUpdated = useCallback(async () => {
+	const handleFetchLastUpdatedDocuments = useCallback(async () => {
 		try {
 			await dispatch(fetchLastUpdatedDocuments());
 		} catch (e) {
@@ -30,7 +32,7 @@ export const Home: FunctionComponent = () => {
 	}, [dispatch]);
 
 	const handleFetchHomeData = async () => {
-		await handleFetchLastUpdated();
+		await handleFetchLastUpdatedDocuments();
 		await handleFetchDirectories();
 	};
 
@@ -91,16 +93,11 @@ export const Home: FunctionComponent = () => {
 					Last updated
 				</Text>
 				<ScrollView horizontal showsHorizontalScrollIndicator={false}>
-					<HStack space="7.5%">
-						{lastUpdated &&
-							lastUpdated.map((document) => (
-								<DocumentCard
-									document={document}
-									key={document.uuid}
-									handleRefetch={handleFetchLastUpdated}
-								/>
-							))}
-					</HStack>
+					<DocumentsList
+						documents={lastUpdatedDocuments}
+						handleFetchDirectory={handleFetchLastUpdatedDocuments}
+						spacing="10"
+					/>
 				</ScrollView>
 			</Box>
 		</PageLayout>

@@ -3,7 +3,7 @@ import React, {
 	FunctionComponent,
 	useCallback,
 	useState,
-} from "react";
+} from 'react';
 import {
 	Box,
 	Button,
@@ -13,23 +13,23 @@ import {
 	ScrollView,
 	Text,
 	VStack,
-} from "native-base";
-import { useAppDispatch } from "../../../common/hooks/store";
-import { InvalidUsernameOrPassword } from "../../../modules/auth/api/error";
-import { loginWithEmailPassword } from "../../../modules/auth/store/thunks";
-import FormControl from "../../../common/components/formControl";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { PublicStackParamList } from "../../../common/navigation/publicRoutes";
-import { Platform } from "react-native";
+} from 'native-base';
+import { useAppDispatch } from '../../../common/hooks/store';
+import { InvalidUsernameOrPassword } from '../../../modules/auth/api/error';
+import { loginWithEmailPassword } from '../../../modules/auth/store/thunks';
+import FormControl from '../../../common/components/formControl';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { PublicStackParamList } from '../../../common/navigation/publicRoutes';
+import { Platform } from 'react-native';
 
-type Error = "IUP" | null;
+type Error = 'IUP' | null;
 
 export const Login: FunctionComponent<
-	NativeStackScreenProps<PublicStackParamList, "Login">
+	NativeStackScreenProps<PublicStackParamList, 'Login'>
 > = ({ navigation }) => {
 	const [error, setError] = useState<Error>(null);
-	const [email, setEmail] = useState<string>("");
-	const [password, setPassword] = useState<string>("");
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
 
 	const dispatch = useAppDispatch();
 
@@ -41,7 +41,7 @@ export const Login: FunctionComponent<
 				await dispatch(loginWithEmailPassword(email, password));
 			} catch (e) {
 				if (e instanceof InvalidUsernameOrPassword) {
-					setError("IUP");
+					setError('IUP');
 				}
 			}
 		},
@@ -50,14 +50,14 @@ export const Login: FunctionComponent<
 
 	const getPasswordError = useCallback(() => {
 		switch (error) {
-			case "IUP":
-				return "Invalid email or password";
+		case 'IUP':
+			return 'Invalid email or password';
 		}
 	}, [error]);
 
 	return (
 		<KeyboardAvoidingView
-			behavior={Platform.OS === "ios" ? "padding" : "height"}
+			behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 			style={{ flex: 1 }}
 		>
 			<ScrollView backgroundColor="#F6F6F6">
@@ -123,7 +123,7 @@ export const Login: FunctionComponent<
 						<Button
 							background="#F4F4F4"
 							_pressed={{
-								opacity: ".5",
+								opacity: '.5',
 							}}
 							mt={8}
 							py={4}
@@ -140,9 +140,9 @@ export const Login: FunctionComponent<
 							textAlign="center"
 							mt="8"
 							_pressed={{
-								opacity: ".5",
+								opacity: '.5',
 							}}
-							onPress={() => navigation.navigate("Register")}
+							onPress={() => navigation.navigate('Register')}
 							fontSize="md"
 							color="gray.500"
 						>

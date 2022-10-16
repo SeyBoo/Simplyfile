@@ -1,4 +1,4 @@
-import { Document } from "./documents.interface";
+import { Document } from './documents.interface';
 
 export interface DirectoryMetadata {
 	name: string;

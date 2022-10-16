@@ -1,9 +1,9 @@
 import {
 	Directory,
 	DirectoryMetadata,
-} from "../../../common/types/directory.interface";
+} from '../../../common/types/directory.interface';
 
-const DIRECTORIES_API_BACKEND_MODULE = "dummy";
+const DIRECTORIES_API_BACKEND_MODULE = 'dummy';
 
 export interface DirectoriesBackend {
 	fetchDirectories(): Promise<DirectoryMetadata[]>;
@@ -21,7 +21,7 @@ let authBackendInstance: DirectoriesBackend | undefined;
 
 export async function getDirectoriesBackend(): Promise<DirectoriesBackend> {
 	if (authBackendInstance === undefined) {
-		const mod = await import("./backends/" + DIRECTORIES_API_BACKEND_MODULE);
+		const mod = await import('./backends/' + DIRECTORIES_API_BACKEND_MODULE);
 		authBackendInstance = new mod.default() as DirectoriesBackend;
 	}
 	return authBackendInstance;

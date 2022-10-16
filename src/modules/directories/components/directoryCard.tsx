@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from "react";
-import { Box, Button, HStack, Image, Text } from "native-base";
-import { ActionSheetIOS, Alert, Platform } from "react-native";
-import FolderIcon from "../../../common/assets/icon/folder.png";
-import { removeDirectory, updateDirectory } from "../store/thunks";
-import { useAppDispatch } from "../../../common/hooks/store";
-import { useNavigation } from "@react-navigation/native";
+import React, { FunctionComponent } from 'react';
+import { Box, Button, HStack, Image, Text } from 'native-base';
+import { ActionSheetIOS, Alert, Platform } from 'react-native';
+import FolderIcon from '../../../common/assets/icon/folder.png';
+import { removeDirectory, updateDirectory } from '../store/thunks';
+import { useAppDispatch } from '../../../common/hooks/store';
+import { useNavigation } from '@react-navigation/native';
 
 interface DirectoryProps {
 	name: string;
@@ -20,14 +20,14 @@ const DirectoryCard: FunctionComponent<DirectoryProps> = ({ name, uuid }) => {
 	const dispatch = useAppDispatch();
 
 	const handleRenameModal = () => {
-		if (Platform.OS === "ios") {
+		if (Platform.OS === 'ios') {
 			Alert.prompt(
 				`Update ${name}`,
-				"",
+				'',
 				[
-					{ text: "Cancel", style: "cancel" },
+					{ text: 'Cancel', style: 'cancel' },
 					{
-						text: "Update",
+						text: 'Update',
 						onPress: (text) => {
 							if (text) {
 								(async () => await dispatch(updateDirectory(uuid, text)))();
@@ -35,20 +35,20 @@ const DirectoryCard: FunctionComponent<DirectoryProps> = ({ name, uuid }) => {
 						},
 					},
 				],
-				"plain-text"
+				'plain-text'
 			);
 		}
 		// TODO Android
 	};
 
 	const handleLongPress = () => {
-		if (Platform.OS === "ios") {
+		if (Platform.OS === 'ios') {
 			ActionSheetIOS.showActionSheetWithOptions(
 				{
-					options: ["Cancel", "Rename", "Delete"],
+					options: ['Cancel', 'Rename', 'Delete'],
 					destructiveButtonIndex: 2,
 					cancelButtonIndex: 0,
-					userInterfaceStyle: "dark",
+					userInterfaceStyle: 'dark',
 				},
 				(buttonIndex) => {
 					if (buttonIndex === 1) {
@@ -70,7 +70,7 @@ const DirectoryCard: FunctionComponent<DirectoryProps> = ({ name, uuid }) => {
 				opacity: 0.5,
 			}}
 			onLongPress={() => handleLongPress()}
-			onPress={() => navigation.navigate("Directory", { name, uuid })}
+			onPress={() => navigation.navigate('Directory', { name, uuid })}
 		>
 			<HStack
 				alignItems="center"

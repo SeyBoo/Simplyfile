@@ -1,16 +1,16 @@
-import React, { FunctionComponent } from "react";
-import { Document } from "../../../common/types/documents.interface";
-import { Box, Button, HStack, Icon, Image, Text } from "native-base";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import moment from "moment";
-import { ActionSheetIOS, Alert, Platform } from "react-native";
+import React, { FunctionComponent } from 'react';
+import { Document } from '../../../common/types/documents.interface';
+import { Box, Button, HStack, Icon, Image, Text } from 'native-base';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import moment from 'moment';
+import { ActionSheetIOS, Alert, Platform } from 'react-native';
 import {
 	deleteDocument,
 	updateDocumentName,
 	bookmarkDocument,
-} from "../../documents/store/thunks";
-import { useNavigation } from "@react-navigation/native";
-import { useAppDispatch } from "../../../common/hooks/store";
+} from '../../documents/store/thunks';
+import { useNavigation } from '@react-navigation/native';
+import { useAppDispatch } from '../../../common/hooks/store';
 
 interface DocumentCardProps {
 	document: Document;
@@ -48,14 +48,14 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
 	};
 
 	const handleRenameModal = () => {
-		if (Platform.OS === "ios") {
+		if (Platform.OS === 'ios') {
 			Alert.prompt(
 				`Update ${document.name}`,
-				"",
+				'',
 				[
-					{ text: "Cancel", style: "cancel" },
+					{ text: 'Cancel', style: 'cancel' },
 					{
-						text: "Update",
+						text: 'Update',
 						onPress: (text) => {
 							if (text) {
 								(async () => handleRename(text))();
@@ -63,20 +63,20 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
 						},
 					},
 				],
-				"plain-text"
+				'plain-text'
 			);
 		}
 		// TODO Android
 	};
 
 	const handleLongPress = () => {
-		if (Platform.OS === "ios") {
+		if (Platform.OS === 'ios') {
 			ActionSheetIOS.showActionSheetWithOptions(
 				{
-					options: ["Cancel", "Rename", "Delete"],
+					options: ['Cancel', 'Rename', 'Delete'],
 					destructiveButtonIndex: 2,
 					cancelButtonIndex: 0,
-					userInterfaceStyle: "dark",
+					userInterfaceStyle: 'dark',
 				},
 				(buttonIndex) => {
 					if (buttonIndex === 1) {
@@ -98,7 +98,7 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
 				opacity: 0.5,
 			}}
 			onPress={() =>
-				navigation.navigate("Document", { uuid, directoryUuid: directory })
+				navigation.navigate('Document', { uuid, directoryUuid: directory })
 			}
 			onLongPress={() => handleLongPress()}
 		>
@@ -118,7 +118,7 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
 					</Text>
 					<Button
 						background="transparent"
-						width={"1/2"}
+						width={'1/2'}
 						_pressed={{
 							opacity: 0.5,
 						}}
@@ -129,7 +129,7 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
 							color="black"
 							as={
 								<MaterialIcons
-									name={document.bookmarked ? "bookmark" : "bookmark-border"}
+									name={document.bookmarked ? 'bookmark' : 'bookmark-border'}
 								/>
 							}
 						/>

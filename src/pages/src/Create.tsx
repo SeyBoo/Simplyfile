@@ -4,17 +4,17 @@ import React, {
 	useMemo,
 	useRef,
 	useState,
-} from "react";
-import { Portal, PortalHost } from "@gorhom/portal";
+} from 'react';
+import { Portal, PortalHost } from '@gorhom/portal';
 import BottomSheet, {
 	BottomSheetBackdrop,
 	BottomSheetScrollView,
-} from "@gorhom/bottom-sheet";
-import CreateIconInActive from "../../common/assets/icon/add.png";
-import FileIcon from "../../common/assets/icon/file.png";
-import CameraIcon from "../../common/assets/icon/camera.png";
-import ScanIcon from "../../common/assets/icon/scan.png";
-import ImageIcon from "../../common/assets/icon/image.png";
+} from '@gorhom/bottom-sheet';
+import CreateIconInActive from '../../common/assets/icon/add.png';
+import FileIcon from '../../common/assets/icon/file.png';
+import CameraIcon from '../../common/assets/icon/camera.png';
+import ScanIcon from '../../common/assets/icon/scan.png';
+import ImageIcon from '../../common/assets/icon/image.png';
 import {
 	Button,
 	Center,
@@ -23,15 +23,15 @@ import {
 	Pressable,
 	Text,
 	VStack,
-} from "native-base";
-import { launchCamera, launchImageLibrary } from "react-native-image-picker";
+} from 'native-base';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import {
 	CameraOptions,
 	ImageLibraryOptions,
 	ImagePickerResponse,
-} from "react-native-image-picker/src/types";
-import { useNavigation } from "@react-navigation/native";
-import DocumentScanner from "react-native-document-scanner-plugin";
+} from 'react-native-image-picker/src/types';
+import { useNavigation } from '@react-navigation/native';
+import DocumentScanner from 'react-native-document-scanner-plugin';
 
 type CreateNav = {
 	navigate: (value: string, arg1: { uri: string }) => void;
@@ -40,7 +40,7 @@ type CreateNav = {
 export const Create: FunctionComponent = () => {
 	const navigation = useNavigation<CreateNav>();
 	const sheetRef = useRef<BottomSheet>(null);
-	const snapPoints = useMemo(() => ["50%"], []);
+	const snapPoints = useMemo(() => ['50%'], []);
 	const [showModal, setShowModal] = useState(false);
 	const [image, setImage] = useState<ImagePickerResponse>();
 
@@ -62,7 +62,7 @@ export const Create: FunctionComponent = () => {
 	const handleCamera = async () => {
 		const options: CameraOptions = {
 			saveToPhotos: false,
-			mediaType: "photo",
+			mediaType: 'photo',
 			includeBase64: false,
 		};
 		await launchCamera(options, (response) => setImage(response));
@@ -71,7 +71,7 @@ export const Create: FunctionComponent = () => {
 	const handlePhotoLibrary = async () => {
 		const options: ImageLibraryOptions = {
 			selectionLimit: 0,
-			mediaType: "photo",
+			mediaType: 'photo',
 			includeBase64: false,
 			includeExtra: false,
 		};
@@ -98,7 +98,7 @@ export const Create: FunctionComponent = () => {
 			return;
 		}
 		setShowModal(false);
-		navigation.navigate("AddNewDocument", {
+		navigation.navigate('AddNewDocument', {
 			uri: image?.assets[0].uri,
 		});
 	}, [navigation, image, image?.assets]);

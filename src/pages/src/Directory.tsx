@@ -1,14 +1,14 @@
-import React, { FunctionComponent, useCallback, useEffect } from "react";
-import PageLayout from "../../common/layouts/pageLayout";
-import { useAppDispatch, useAppSelector } from "../../common/hooks/store";
-import { fetchDirectory } from "../../modules/directories/store/thunks";
-import { Spinner } from "native-base";
-import { AuthStackParamList } from "../../common/navigation/authRoutes";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import DocumentsList from "../../modules/documents/components/documentsList";
+import React, { FunctionComponent, useCallback, useEffect } from 'react';
+import PageLayout from '../../common/layouts/pageLayout';
+import { useAppDispatch, useAppSelector } from '../../common/hooks/store';
+import { fetchDirectory } from '../../modules/directories/store/thunks';
+import { Spinner } from 'native-base';
+import { AuthStackParamList } from '../../common/navigation/authRoutes';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import DocumentsList from '../../modules/documents/components/documentsList';
 
 export const Directory: FunctionComponent<
-	NativeStackScreenProps<AuthStackParamList, "Directory">
+	NativeStackScreenProps<AuthStackParamList, 'Directory'>
 > = ({ route }) => {
 	const { uuid } = route.params;
 	const dispatch = useAppDispatch();

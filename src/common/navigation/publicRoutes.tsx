@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from "react";
-import { Splash, Register, Login } from "../../pages";
-import { createStackNavigator } from "@react-navigation/stack";
+import React, { FunctionComponent } from 'react';
+import { Splash, Register, Login } from '../../pages';
+import { createStackNavigator } from '@react-navigation/stack';
 
 export type PublicStackParamList = {
 	Splash: undefined;
