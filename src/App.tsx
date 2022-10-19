@@ -13,8 +13,10 @@ const App = () => {
 			<NativeBaseProvider>
 				<GestureHandlerRootView style={{ flex: 1 }}>
 					<PortalProvider>
-						<StatusBar barStyle="dark-content" />
-						<Navigation />
+						<AlertProvider>
+							<StatusBar barStyle="dark-content" />
+							<Navigation />
+						</AlertProvider>
 					</PortalProvider>
 				</GestureHandlerRootView>
 			</NativeBaseProvider>
