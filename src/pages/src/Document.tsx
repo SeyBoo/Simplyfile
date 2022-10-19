@@ -28,9 +28,10 @@ import TrashIcon from '../../common/assets/icon/trash.png';
 import AcceptChangeIcon from '../../common/assets/icon/accept-change.png';
 import { useNavigation } from '@react-navigation/native';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
-import { Alert, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import BaseLayout from '../../common/layouts/baseLayout';
 import hasAndroidWritePermission from '../../common/utils/getAndroidPermission.ts';
+import { useSetAlert } from '../../common/hooks/alert';
 
 export const Document: FunctionComponent<
 NativeStackScreenProps<AuthStackParamList, 'Document'>
@@ -55,12 +56,15 @@ NativeStackScreenProps<AuthStackParamList, 'Document'>
       return;
     }
 
-		if (document) {
-			await CameraRoll.save(document?.image).then(() => {
-				Alert.alert('Successfully saved', '', [{ text: 'OK' }]);
-			});
-		}
-	}
+    if (document) {
+      await CameraRoll.save(document?.image).then(() => {
+        setAlert({
+          title: 'Successfully saved',
+          primmaryButton: 'OK'
+        });
+      });
+    }
+  }
 
   const handleDeleteDocument = async () => {
     try {
