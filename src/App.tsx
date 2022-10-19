@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import Navigation from './common/navigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PortalProvider } from '@gorhom/portal';
+import AlertProvider from './common/hooks/alert';
 
 const App = () => {
 	return (
