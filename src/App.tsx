@@ -6,20 +6,23 @@ import { Provider } from 'react-redux';
 import Navigation from './common/navigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PortalProvider } from '@gorhom/portal';
+import AlertPromptProvider from './common/hooks/alertPrompt';
 
 const App = () => {
-	return (
-		<Provider store={store}>
-			<NativeBaseProvider>
-				<GestureHandlerRootView style={{ flex: 1 }}>
-					<PortalProvider>
-						<StatusBar barStyle="dark-content" />
-						<Navigation />
-					</PortalProvider>
-				</GestureHandlerRootView>
-			</NativeBaseProvider>
-		</Provider>
-	);
+  return (
+    <Provider store={store}>
+      <NativeBaseProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <PortalProvider>
+            <AlertPromptProvider>
+              <StatusBar barStyle="dark-content" />
+              <Navigation />
+            </AlertPromptProvider>
+          </PortalProvider>
+        </GestureHandlerRootView>
+      </NativeBaseProvider>
+    </Provider>
+  );
 };
 
 export default App;
