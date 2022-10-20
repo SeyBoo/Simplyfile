@@ -3,7 +3,7 @@ import { Document } from '../../../common/types/documents.interface';
 import { Box, Button, HStack, Icon, Image, Text } from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
-import { ActionSheetIOS, Alert, Platform } from 'react-native';
+import { ActionSheetIOS, Platform } from 'react-native';
 import {
 	deleteDocument,
 	updateDocumentName,
@@ -11,6 +11,7 @@ import {
 } from '../../documents/store/thunks';
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch } from '../../../common/hooks/store';
+import { useSetAlertPrompt } from '../../../common/hooks/alertPrompt';
 
 interface DocumentCardProps {
 	document: Document;
@@ -28,9 +29,10 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
 	document,
 	handleRefetch,
 }) => {
-	const dispatch = useAppDispatch();
-	const navigation = useNavigation<DocumentNav>();
-	const { uuid, directory } = document;
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation<DocumentNav>();
+  const setAlertPrompt = useSetAlertPrompt();
+  const { uuid, directory } = document;
 
 	const handleRename = async (text: string) => {
 		await dispatch(updateDocumentName(uuid, text));
@@ -47,27 +49,15 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
 		await handleRefetch();
 	};
 
-	const handleRenameModal = () => {
-		if (Platform.OS === 'ios') {
-			Alert.prompt(
-				`Update ${document.name}`,
-				'',
-				[
-					{ text: 'Cancel', style: 'cancel' },
-					{
-						text: 'Update',
-						onPress: (text) => {
-							if (text) {
-								(async () => handleRename(text))();
-							}
-						},
-					},
-				],
-				'plain-text'
-			);
-		}
-		// TODO Android
-	};
+  const handleRenameModal = () => {
+    setAlertPrompt({
+      message: `Update ${document.name}`,
+      action: {
+        f: handleRename,
+        name: 'Update',
+      },
+    });
+  };
 
 	const handleLongPress = () => {
 		if (Platform.OS === 'ios') {

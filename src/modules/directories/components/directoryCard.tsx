@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { Box, Button, HStack, Image, Text } from 'native-base';
-import { ActionSheetIOS, Alert, Platform } from 'react-native';
+import { ActionSheetIOS, Platform } from 'react-native';
 import FolderIcon from '../../../common/assets/icon/folder.png';
 import { removeDirectory, updateDirectory } from '../store/thunks';
 import { useAppDispatch } from '../../../common/hooks/store';
 import { useNavigation } from '@react-navigation/native';
+import { useSetAlertPrompt } from '../../../common/hooks/alertPrompt';
 
 interface DirectoryProps {
 	name: string;
@@ -16,51 +17,27 @@ type DirectoryNav = {
 };
 
 const DirectoryCard: FunctionComponent<DirectoryProps> = ({ name, uuid }) => {
-	const navigation = useNavigation<DirectoryNav>();
-	const dispatch = useAppDispatch();
+  const navigation = useNavigation<DirectoryNav>();
+  const dispatch = useAppDispatch();
+  const setAlertPrompt = useSetAlertPrompt();
 
-	const handleRenameModal = () => {
-		if (Platform.OS === 'ios') {
-			Alert.prompt(
-				`Update ${name}`,
-				'',
-				[
-					{ text: 'Cancel', style: 'cancel' },
-					{
-						text: 'Update',
-						onPress: (text) => {
-							if (text) {
-								(async () => await dispatch(updateDirectory(uuid, text)))();
-							}
-						},
-					},
-				],
-				'plain-text'
-			);
-		}
-		// TODO Android
-	};
+  const handleUpdateDirectory = async (text: string) => {
+    try {
+      await dispatch(updateDirectory(uuid, text));
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-	const handleLongPress = () => {
-		if (Platform.OS === 'ios') {
-			ActionSheetIOS.showActionSheetWithOptions(
-				{
-					options: ['Cancel', 'Rename', 'Delete'],
-					destructiveButtonIndex: 2,
-					cancelButtonIndex: 0,
-					userInterfaceStyle: 'dark',
-				},
-				(buttonIndex) => {
-					if (buttonIndex === 1) {
-						handleRenameModal();
-					} else if (buttonIndex === 2) {
-						(async () => await dispatch(removeDirectory(uuid)))();
-					}
-				}
-			);
-		}
-		//TODO Android
-	};
+  const handleRenameModal = () => {
+    setAlertPrompt({
+      message: `Update ${name}`,
+      action: {
+        f: handleUpdateDirectory,
+        name: 'Update',
+      },
+    });
+  };
 
 	return (
 		<Button
