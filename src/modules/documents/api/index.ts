@@ -1,29 +1,30 @@
 import { Document } from '../../../common/types/documents.interface';
-
-const DIRECTORIES_API_BACKEND_MODULE = 'dummy';
+import { REACT_APP_DOCUMENTS_API_BACKEND_MODULE } from '@env';
 
 export interface DocumentsBackend {
-	fetchDocument(uuid: string): Promise<Document>;
+  fetchDocument(uuid: string): Promise<Document>;
 
-	deleteDocument(uuid: string): Promise<void>;
+  deleteDocument(uuid: string): Promise<void>;
 
-	updateDocumentName(uuid: string, name: string): Promise<void>;
+  updateDocumentName(uuid: string, name: string): Promise<void>;
 
-	bookmarkDocument(uuid: string): Promise<void>;
+  bookmarkDocument(uuid: string): Promise<void>;
 
-	fetchDocuments(): Promise<Document[]>;
+  fetchDocuments(): Promise<Document[]>;
 
-	addDocument(name: string, uri: string, dossierUuid: string): Promise<void>;
+  addDocument(name: string, uri: string, dossierUuid: string): Promise<void>;
 
-	fetchLastUpdatedDocuments(): Promise<Document[]>;
+  fetchLastUpdatedDocuments(): Promise<Document[]>;
 }
 
 let authBackendInstance: DocumentsBackend | undefined;
 
 export async function getDocumentsBackend(): Promise<DocumentsBackend> {
-	if (authBackendInstance === undefined) {
-		const mod = await import('./backends/' + DIRECTORIES_API_BACKEND_MODULE);
-		authBackendInstance = new mod.default() as DocumentsBackend;
-	}
-	return authBackendInstance;
+  if (authBackendInstance === undefined) {
+    const mod = await import(
+      './backends/' + REACT_APP_DOCUMENTS_API_BACKEND_MODULE
+    );
+    authBackendInstance = new mod.default() as DocumentsBackend;
+  }
+  return authBackendInstance;
 }
