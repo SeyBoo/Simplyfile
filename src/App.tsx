@@ -8,6 +8,16 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PortalProvider } from '@gorhom/portal';
 import AlertProvider from './common/hooks/alert';
 import AlertPromptProvider from './common/hooks/alertPrompt';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+
+const AppWrapper = () => {
+  return (
+    <>
+      <StatusBar barStyle="dark-content" />
+      <Navigation />
+    </>
+  );
+};
 
 const App = () => {
   return (
@@ -17,8 +27,9 @@ const App = () => {
           <PortalProvider>
             <AlertProvider>
               <AlertPromptProvider>
-                <StatusBar barStyle="dark-content" />
-                <Navigation />
+                <ActionSheetProvider>
+                  <AppWrapper />
+                </ActionSheetProvider>
               </AlertPromptProvider>
             </AlertProvider>
           </PortalProvider>
