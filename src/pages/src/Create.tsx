@@ -11,7 +11,6 @@ import BottomSheet, {
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
 import CreateIconInActive from '../../common/assets/icon/add.png';
-import FileIcon from '../../common/assets/icon/file.png';
 import CameraIcon from '../../common/assets/icon/camera.png';
 import ScanIcon from '../../common/assets/icon/scan.png';
 import ImageIcon from '../../common/assets/icon/image.png';
@@ -211,7 +210,7 @@ export const Create: FunctionComponent = () => {
                     </HStack>
                   )}
                 </Pressable>
-                <Pressable width="100%">
+                {/* <Pressable width="100%">
                   {({ isPressed }) => (
                     <HStack
                       background="#F6F8FA"
@@ -236,7 +235,7 @@ export const Create: FunctionComponent = () => {
                       />
                     </HStack>
                   )}
-                </Pressable>
+                </Pressable> */}
               </VStack>
             </BottomSheetScrollView>
           </BottomSheet>
