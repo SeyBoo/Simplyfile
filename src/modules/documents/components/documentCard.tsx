@@ -3,7 +3,6 @@ import { Document } from '../../../common/types/documents.interface';
 import { Box, Button, HStack, Icon, Image, Text } from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
-import { ActionSheetIOS, Platform } from 'react-native';
 import {
   deleteDocument,
   updateDocumentName,
@@ -12,6 +11,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch } from '../../../common/hooks/store';
 import { useSetAlertPrompt } from '../../../common/hooks/alertPrompt';
+import { useActionSheet } from '@expo/react-native-action-sheet';
 
 interface DocumentCardProps {
   document: Document;
@@ -32,6 +32,7 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
   const dispatch = useAppDispatch();
   const navigation = useNavigation<DocumentNav>();
   const setAlertPrompt = useSetAlertPrompt();
+  const { showActionSheetWithOptions } = useActionSheet();
   const { uuid, directory } = document;
 
   const handleRename = async (text: string) => {
@@ -60,24 +61,29 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
   };
 
   const handleLongPress = () => {
-    if (Platform.OS === 'ios') {
-      ActionSheetIOS.showActionSheetWithOptions(
-        {
-          options: ['Cancel', 'Rename', 'Delete'],
-          destructiveButtonIndex: 2,
-          cancelButtonIndex: 0,
-          userInterfaceStyle: 'dark',
-        },
-        (buttonIndex) => {
-          if (buttonIndex === 1) {
+    const options = ['Cancel', 'Rename', 'Delete'];
+    const destructiveButtonIndex = 2;
+    const cancelButtonIndex = 0;
+
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+        destructiveButtonIndex,
+      },
+      async (selectedIndex: number) => {
+        switch (selectedIndex) {
+          case 1:
             handleRenameModal();
-          } else if (buttonIndex === 2) {
-            (async () => handleDelete())();
-          }
+            break;
+
+          case destructiveButtonIndex:
+            await handleDelete();
+            break;
+
         }
-      );
-    }
-    //TODO Android
+      }
+    );
   };
 
   return (

@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { Box, Button, HStack, Image, Text } from 'native-base';
-import { ActionSheetIOS, Platform } from 'react-native';
 import FolderIcon from '../../../common/assets/icon/folder.png';
 import { removeDirectory, updateDirectory } from '../store/thunks';
 import { useAppDispatch } from '../../../common/hooks/store';
 import { useNavigation } from '@react-navigation/native';
 import { useSetAlertPrompt } from '../../../common/hooks/alertPrompt';
+import { useActionSheet } from '@expo/react-native-action-sheet';
 
 interface DirectoryProps {
   name: string;
@@ -20,6 +20,7 @@ const DirectoryCard: FunctionComponent<DirectoryProps> = ({ name, uuid }) => {
   const navigation = useNavigation<DirectoryNav>();
   const dispatch = useAppDispatch();
   const setAlertPrompt = useSetAlertPrompt();
+  const { showActionSheetWithOptions } = useActionSheet();
 
   const handleUpdateDirectory = async (text: string) => {
     try {
@@ -40,24 +41,29 @@ const DirectoryCard: FunctionComponent<DirectoryProps> = ({ name, uuid }) => {
   };
 
   const handleLongPress = () => {
-    if (Platform.OS === 'ios') {
-      ActionSheetIOS.showActionSheetWithOptions(
-        {
-          options: ['Cancel', 'Rename', 'Delete'],
-          destructiveButtonIndex: 2,
-          cancelButtonIndex: 0,
-          userInterfaceStyle: 'dark',
-        },
-        (buttonIndex) => {
-          if (buttonIndex === 1) {
+    const options = ['Cancel', 'Rename', 'Delete'];
+    const destructiveButtonIndex = 2;
+    const cancelButtonIndex = 0;
+
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+        destructiveButtonIndex,
+      },
+      async (selectedIndex: number) => {
+        switch (selectedIndex) {
+          case 1:
             handleRenameModal();
-          } else if (buttonIndex === 2) {
-            (async () => await dispatch(removeDirectory(uuid)))();
-          }
+            break;
+
+          case destructiveButtonIndex:
+            await dispatch(removeDirectory(uuid));
+            break;
+
         }
-      );
-    }
-    //TODO Android
+      }
+    );
   };
 
   return (
