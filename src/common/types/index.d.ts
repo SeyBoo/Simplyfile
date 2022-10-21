@@ -1,7 +1,7 @@
 import { Document } from './documents.interface';
 
 declare global {
-	let documents: Document[];
+  let documents: Document[];
 }
 
 export {};

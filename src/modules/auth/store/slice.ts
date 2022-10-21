@@ -4,29 +4,29 @@ import { UserInfo } from '../../../common/types/user.interface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface LoginPayload {
-	user: UserInfo;
+  user: UserInfo;
 }
 
 const userSlice = createSlice({
-	name: 'users',
-	initialState,
-	reducers: {
-		setUser: (state, action: PayloadAction<LoginPayload>) => {
-			const user = action.payload.user;
-			state.userInfo = user;
-			(async () => {
-				try {
-					const parsedValue = JSON.stringify(user);
-					AsyncStorage.setItem(UserInfoLocalStorageName, parsedValue);
-				} catch (e) {
-					console.log(e);
-				}
-			})();
-		},
-		resetUser: (state) => {
-			state.userInfo = null;
-		},
-	},
+  name: 'users',
+  initialState,
+  reducers: {
+    setUser: (state, action: PayloadAction<LoginPayload>) => {
+      const user = action.payload.user;
+      state.userInfo = user;
+      (async () => {
+        try {
+          const parsedValue = JSON.stringify(user);
+          AsyncStorage.setItem(UserInfoLocalStorageName, parsedValue);
+        } catch (e) {
+          console.log(e);
+        }
+      })();
+    },
+    resetUser: (state) => {
+      state.userInfo = null;
+    },
+  },
 });
 
 export const { setUser, resetUser } = userSlice.actions;

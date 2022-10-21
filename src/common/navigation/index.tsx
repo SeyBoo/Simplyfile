@@ -5,11 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useAppSelector } from '../hooks/store';
 
 export default function Navigation() {
-	const isLoggedIn = useAppSelector((state) => state.users.userInfo);
+  const isLoggedIn = useAppSelector((state) => state.users.userInfo);
 
-	return (
-		<NavigationContainer>
-			{isLoggedIn ? <AuthRoutes /> : <PublicRoutes />}
-		</NavigationContainer>
-	);
+  return (
+    <NavigationContainer>
+      {isLoggedIn ? <AuthRoutes /> : <PublicRoutes />}
+    </NavigationContainer>
+  );
 }

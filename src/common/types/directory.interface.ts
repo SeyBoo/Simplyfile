@@ -1,11 +1,11 @@
 import { Document } from './documents.interface';
 
 export interface DirectoryMetadata {
-	name: string;
-	uuid: string;
+  name: string;
+  uuid: string;
 }
 
 export interface Directory {
-	metadata: DirectoryMetadata;
-	documents: Document[] | null;
+  metadata: DirectoryMetadata;
+  documents: Document[] | null;
 }
