@@ -3,6 +3,7 @@ import React, {
   FunctionComponent,
   useState,
   useContext,
+  PropsWithChildren,
 } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Dialog from 'react-native-dialog';
@@ -20,9 +21,9 @@ type AlertPromptActions = {
 
 const AlertPromptContext = createContext({} as AlertPromptActions);
 
-const AlertPromptProvider: FunctionComponent = ({ children }) => {
   const [message, setMessage] = useState<boolean>(false);
   const [name, setName] = useState<boolean>(false);
+const AlertPromptProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [importedFunction, setImportedFunction] =
     useState<(text: string) => void | null>(null);

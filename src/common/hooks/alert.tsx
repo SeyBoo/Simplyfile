@@ -1,6 +1,7 @@
 import React, {
   createContext,
   FunctionComponent,
+  PropsWithChildren,
   useContext,
   useState,
 } from 'react';
@@ -19,7 +20,7 @@ type AlertContextActions = {
 
 const AlertContext = createContext({} as AlertContextActions);
 
-const AlertProvider: FunctionComponent = ({ children }) => {
+const AlertProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
