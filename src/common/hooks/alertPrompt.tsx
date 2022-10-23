@@ -10,13 +10,10 @@ import Dialog from 'react-native-dialog';
 
 interface AlertPromptProps {
   message: string;
-  action: { f: (text: string) => void; name: string };
+  action: { f: (text: string) => Promise<void>; name: string };
 }
 type AlertPromptActions = {
-  setAlertPrompt: (
-    message: string,
-    action: { f: (text: string) => void; name: string }
-  ) => void;
+  setAlertPrompt: ({ message, action: { f, name }, }: AlertPromptProps) => void;
 };
 
 const AlertPromptContext = createContext({} as AlertPromptActions);
