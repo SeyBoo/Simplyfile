@@ -18,18 +18,19 @@ type AlertPromptActions = {
 
 const AlertPromptContext = createContext({} as AlertPromptActions);
 
-  const [message, setMessage] = useState<boolean>(false);
-  const [name, setName] = useState<boolean>(false);
 const AlertPromptProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
+  const [name, setName] = useState<string>('');
+
   const [importedFunction, setImportedFunction] =
-    useState<(text: string) => void | null>(null);
+    useState<(text: string) => void | unknown>();
   const [functionData, setFunctionData] = useState<string>('');
 
   const setAlertPrompt = ({
     message,
     action: { f, name },
-  }: AlertPromptProps) => {
+  }: AlertPromptProps): void => {
     setMessage(message);
     setImportedFunction(() => f);
     setName(name);
@@ -37,9 +38,11 @@ const AlertPromptProvider: FunctionComponent<PropsWithChildren> = ({ children })
   };
 
   const handleCustomFunction = async () => {
-    await importedFunction(functionData);
-    setFunctionData('');
-    setOpen(false);
+    if (importedFunction) {
+      await importedFunction(functionData);
+      setFunctionData('');
+      setOpen(false);
+    }
   };
 
   return (
