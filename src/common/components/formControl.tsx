@@ -22,6 +22,7 @@ const FormControl: FunctionComponent<FormControlProps> = ({
   type,
 }) => {
   const [show, setShow] = useState<boolean>(false);
+
   const renderInput = useCallback(() => {
     return (
       <Input
@@ -63,7 +64,7 @@ const FormControl: FunctionComponent<FormControlProps> = ({
         </Text>
         {required && (
           <Text fontSize="xl" ml="1" mb="2" color={'red.500'}>
-						*
+            *
           </Text>
         )}
       </HStack>
