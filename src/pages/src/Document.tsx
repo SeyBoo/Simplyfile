@@ -30,7 +30,7 @@ import { useNavigation } from '@react-navigation/native';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import { Platform } from 'react-native';
 import BaseLayout from '../../common/layouts/baseLayout';
-import hasAndroidWritePermission from '../../common/utils/getAndroidPermission.ts';
+import hasAndroidWritePermission from '../../common/utils/getAndroidPermission';
 import { useSetAlert } from '../../common/hooks/alert';
 
 export const Document: FunctionComponent<

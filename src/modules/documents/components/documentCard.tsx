@@ -71,7 +71,7 @@ const DocumentCard: FunctionComponent<DocumentCardProps> = ({
         cancelButtonIndex,
         destructiveButtonIndex,
       },
-      async (selectedIndex: number) => {
+      async (selectedIndex) => {
         switch (selectedIndex) {
           case 1:
             handleRenameModal();
