@@ -28,8 +28,9 @@ NativeStackScreenProps<AuthStackParamList, 'AddNewDocument'>
   const dispatch = useAppDispatch();
   const directories = useAppSelector((state) => state.directories.directories);
 
-  const [name, setName] = useState('');
-  const [directory, setDirectory] = useState('');
+  const [name, setName] = useState<string>('');
+  const [directory, setDirectory] = useState<string>('');
+
 
   useEffect(() => {
     (async () => {

@@ -4,7 +4,13 @@ import {
   DirectoryMetadata,
 } from '../../../../common/types/directory.interface';
 import { dummyDirectoriesMetadata } from './dummy-data';
-import '../../../documents/api/backends/dummy';
+import { Document } from '../../../../common/types/documents.interface';
+
+interface globalI {
+  documents: Document[];
+}
+
+declare let global: globalI;
 
 let directoriesMetadata = dummyDirectoriesMetadata;
 

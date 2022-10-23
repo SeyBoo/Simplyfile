@@ -2,6 +2,12 @@ import { Document } from '../../../../common/types/documents.interface';
 import { DummyDocuments } from './dummy-data';
 import { DocumentsBackend } from '../index';
 
+interface globalI {
+  documents: Document[];
+}
+
+declare let global: globalI;
+
 global.documents = DummyDocuments;
 
 export default class DocumentDummy implements DocumentsBackend {
