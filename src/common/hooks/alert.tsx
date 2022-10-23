@@ -15,7 +15,7 @@ interface AlertProps {
 }
 
 type AlertContextActions = {
-  setAlert: ({title, description, primmaryButton }: AlertProps) => void;
+  setAlert: ({ title, description, primmaryButton }: AlertProps) => void;
 };
 
 const AlertContext = createContext({} as AlertContextActions);
@@ -26,7 +26,7 @@ const AlertProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const [description, setDescription] = useState<string>('');
   const [primmaryButton, setPrimaryButton] = useState<string>('Cancel');
 
-  const setAlert = ({title, description, primmaryButton }: AlertProps) => {
+  const setAlert = ({ title, description, primmaryButton }: AlertProps) => {
     setTitle(title);
     if (description) {
       setDescription(description);
