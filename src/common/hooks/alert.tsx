@@ -8,7 +8,7 @@ import React, {
 import { StyleSheet, View } from 'react-native';
 import Dialog from 'react-native-dialog';
 
-interface AlertProps {
+export interface AlertProps {
   title: string;
   description?: string;
   primmaryButton?: string;
