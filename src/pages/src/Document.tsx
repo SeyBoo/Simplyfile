@@ -32,6 +32,7 @@ import { Platform } from 'react-native';
 import BaseLayout from '../../common/layouts/baseLayout';
 import hasAndroidWritePermission from '../../common/utils/getAndroidPermission';
 import { useSetAlert } from '../../common/hooks/alert';
+import handleDisplayCatchError from '../../common/utils/handleDisplayCatchError';
 
 export const Document: FunctionComponent<
 NativeStackScreenProps<AuthStackParamList, 'Document'>
@@ -47,7 +48,7 @@ NativeStackScreenProps<AuthStackParamList, 'Document'>
     try {
       await dispatch(fetchDocument(uuid));
     } catch (e) {
-      console.log(e);
+      handleDisplayCatchError(e, setAlert);
     }
   }, [dispatch, uuid]);
 
@@ -60,7 +61,7 @@ NativeStackScreenProps<AuthStackParamList, 'Document'>
       await CameraRoll.save(document?.image).then(() => {
         setAlert({
           title: 'Successfully saved',
-          primmaryButton: 'OK'
+          primmaryButton: 'OK',
         });
       });
     }
@@ -71,7 +72,7 @@ NativeStackScreenProps<AuthStackParamList, 'Document'>
       await dispatch(deleteDocument(uuid));
       navigation.goBack();
     } catch (e) {
-      console.log(e);
+      handleDisplayCatchError(e, setAlert);
     }
   };
 
@@ -80,7 +81,7 @@ NativeStackScreenProps<AuthStackParamList, 'Document'>
       await dispatch(updateDocumentName(uuid, name));
       await handleFetchDocument();
     } catch (e) {
-      console.log(e);
+      handleDisplayCatchError(e, setAlert);
     }
   };
 

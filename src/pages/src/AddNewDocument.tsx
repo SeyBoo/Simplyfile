@@ -19,6 +19,8 @@ import { useAppDispatch, useAppSelector } from '../../common/hooks/store';
 import { addNewDocument } from '../../modules/documents/store/thunks';
 import BaseLayout from '../../common/layouts/baseLayout';
 import { fetchDirectories } from '../../modules/directories/store/thunks';
+import handleDisplayCatchError from '../../common/utils/handleDisplayCatchError';
+import { useSetAlert } from '../../common/hooks/alert';
 
 export const AddNewDocument: FunctionComponent<
 NativeStackScreenProps<AuthStackParamList, 'AddNewDocument'>
@@ -27,17 +29,17 @@ NativeStackScreenProps<AuthStackParamList, 'AddNewDocument'>
   const { uri } = route.params;
   const dispatch = useAppDispatch();
   const directories = useAppSelector((state) => state.directories.directories);
+  const setAlert = useSetAlert();
 
   const [name, setName] = useState<string>('');
   const [directory, setDirectory] = useState<string>('');
-
 
   useEffect(() => {
     (async () => {
       try {
         await dispatch(fetchDirectories());
       } catch (e) {
-        console.error(e);
+        handleDisplayCatchError(e, setAlert);
       }
     })();
   }, [dispatch]);
@@ -47,7 +49,7 @@ NativeStackScreenProps<AuthStackParamList, 'AddNewDocument'>
       await dispatch(addNewDocument(name, uri, directory));
       navigation.goBack();
     } catch (e) {
-      console.error(e);
+      handleDisplayCatchError(e, setAlert);
     }
   };
 

@@ -4,16 +4,19 @@ import React, { FunctionComponent } from 'react';
 import { useAppDispatch } from '../../../common/hooks/store';
 import { createDirectory } from '../store/thunks';
 import { useSetAlertPrompt } from '../../../common/hooks/alertPrompt';
+import handleDisplayCatchError from '../../../common/utils/handleDisplayCatchError';
+import { useSetAlert } from '../../../common/hooks/alert';
 
 const CreateNewDirectory: FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const setAlertPrompt = useSetAlertPrompt();
+  const setAlert = useSetAlert();
 
   const handleAddNewDirectory = async (name: string) => {
     try {
       await dispatch(createDirectory(name));
     } catch (e) {
-      console.log(e);
+      handleDisplayCatchError(e, setAlert);
     }
   };
 

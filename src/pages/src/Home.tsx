@@ -7,10 +7,13 @@ import { fetchDirectories } from '../../modules/directories/store/thunks';
 import { fetchLastUpdatedDocuments } from '../../modules/documents/store/thunks';
 import CreateNewDirectory from '../../modules/directories/components/createNewDirectory';
 import DocumentsList from '../../modules/documents/components/documentsList';
+import handleDisplayCatchError from '../../common/utils/handleDisplayCatchError';
+import { useSetAlert } from '../../common/hooks/alert';
 
 export const Home: FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const directories = useAppSelector((state) => state.directories.directories);
+  const setAlert = useSetAlert();
   const lastUpdatedDocuments = useAppSelector(
     (state) => state.documents.lastUpdated
   );
@@ -19,7 +22,7 @@ export const Home: FunctionComponent = () => {
     try {
       await dispatch(fetchLastUpdatedDocuments());
     } catch (e) {
-      console.log(e);
+      handleDisplayCatchError(e, setAlert);
     }
   }, [dispatch]);
 
@@ -27,7 +30,7 @@ export const Home: FunctionComponent = () => {
     try {
       await dispatch(fetchDirectories());
     } catch (e) {
-      console.log(e);
+      handleDisplayCatchError(e, setAlert);
     }
   }, [dispatch]);
 

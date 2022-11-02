@@ -6,6 +6,8 @@ import { Spinner } from 'native-base';
 import { AuthStackParamList } from '../../common/navigation/authRoutes';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import DocumentsList from '../../modules/documents/components/documentsList';
+import handleDisplayCatchError from '../../common/utils/handleDisplayCatchError';
+import { useSetAlert } from '../../common/hooks/alert';
 
 export const Directory: FunctionComponent<
 NativeStackScreenProps<AuthStackParamList, 'Directory'>
@@ -16,11 +18,13 @@ NativeStackScreenProps<AuthStackParamList, 'Directory'>
     (state) => state.directories.currentDirectory
   );
   const currentDocument = useAppSelector((state) => state.documents.document);
+  const setAlert = useSetAlert();
+
   const handleFetchDirectory = useCallback(async () => {
     try {
       await dispatch(fetchDirectory(uuid));
     } catch (e) {
-      console.log(e);
+      handleDisplayCatchError(e, setAlert);
     }
   }, [dispatch, uuid]);
 

@@ -6,6 +6,8 @@ import { useAppDispatch } from '../../../common/hooks/store';
 import { useNavigation } from '@react-navigation/native';
 import { useSetAlertPrompt } from '../../../common/hooks/alertPrompt';
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import handleDisplayCatchError from '../../../common/utils/handleDisplayCatchError';
+import { useSetAlert } from '../../../common/hooks/alert';
 
 interface DirectoryProps {
   name: string;
@@ -20,13 +22,14 @@ const DirectoryCard: FunctionComponent<DirectoryProps> = ({ name, uuid }) => {
   const navigation = useNavigation<DirectoryNav>();
   const dispatch = useAppDispatch();
   const setAlertPrompt = useSetAlertPrompt();
+  const setAlert = useSetAlert();
   const { showActionSheetWithOptions } = useActionSheet();
 
   const handleUpdateDirectory = async (text: string) => {
     try {
       await dispatch(updateDirectory(uuid, text));
     } catch (e) {
-      console.log(e);
+      handleDisplayCatchError(e, setAlert);
     }
   };
 
