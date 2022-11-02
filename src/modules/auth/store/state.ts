@@ -18,7 +18,7 @@ let userInfo: User = null;
       userInfo = formatedUser;
     }
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 })();
 

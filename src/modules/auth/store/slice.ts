@@ -19,7 +19,7 @@ const userSlice = createSlice({
           const parsedValue = JSON.stringify(user);
           AsyncStorage.setItem(UserInfoLocalStorageName, parsedValue);
         } catch (e) {
-          console.log(e);
+          console.error(e);
         }
       })();
     },
