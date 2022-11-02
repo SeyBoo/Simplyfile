@@ -13,13 +13,17 @@ const DirectoriesList: FunctionComponent<DirectoryListProps> = ({
     return null;
   }
 
-  return directories?.map((directory) => (
-    <DirectoryCard
-      name={directory.name}
-      key={directory.uuid}
-      uuid={directory.uuid}
-    />
-  ));
+  return (
+    <>
+      {directories?.map((directory) => (
+        <DirectoryCard
+          name={directory.name}
+          key={directory.uuid}
+          uuid={directory.uuid}
+        />
+      ))}
+    </>
+  );
 };
 
 export default DirectoriesList;

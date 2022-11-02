@@ -98,9 +98,11 @@ export const Create: FunctionComponent = () => {
       return;
     }
     setShowModal(false);
-    navigation.navigate('AddNewDocument', {
-      uri: image?.assets[0].uri,
-    });
+    if (image.assets[0].uri) {
+      navigation.navigate('AddNewDocument', {
+        uri: image.assets[0].uri,
+      });
+    }
   }, [navigation, image, image?.assets]);
 
   return (
@@ -125,7 +127,7 @@ export const Create: FunctionComponent = () => {
             <BottomSheetScrollView>
               <VStack mx="5%" mt={2} pb={10}>
                 <Text fontSize="2xl" fontWeight="bold">
-									Add to Simplyfile
+                  Add to Simplyfile
                 </Text>
                 <HStack justifyContent="space-between">
                   <Button
@@ -153,7 +155,7 @@ export const Create: FunctionComponent = () => {
                         textAlign="center"
                         mt={4}
                       >
-												Take Photo
+                        Take Photo
                       </Text>
                     </Center>
                   </Button>
@@ -182,7 +184,7 @@ export const Create: FunctionComponent = () => {
                       textAlign="center"
                       mt={3}
                     >
-											Scan
+                      Scan
                     </Text>
                   </Button>
                 </HStack>
@@ -200,7 +202,7 @@ export const Create: FunctionComponent = () => {
                       opacity={isPressed ? 0.5 : 1}
                     >
                       <Text fontSize="xl" fontWeight={600} textAlign="center">
-												Add from Photo Library
+                        Add from Photo Library
                       </Text>
                       <Image
                         source={ImageIcon}
