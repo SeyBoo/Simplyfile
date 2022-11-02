@@ -54,7 +54,7 @@ const DirectoryCard: FunctionComponent<DirectoryProps> = ({ name, uuid }) => {
         cancelButtonIndex,
         destructiveButtonIndex,
       },
-      async (selectedIndex: number) => {
+      async (selectedIndex?: number | undefined)  => {
         switch (selectedIndex) {
           case 1:
             handleRenameModal();
@@ -63,7 +63,6 @@ const DirectoryCard: FunctionComponent<DirectoryProps> = ({ name, uuid }) => {
           case destructiveButtonIndex:
             await dispatch(removeDirectory(uuid));
             break;
-
         }
       }
     );

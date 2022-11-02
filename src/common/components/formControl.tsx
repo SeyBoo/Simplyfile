@@ -7,7 +7,7 @@ interface FormControlProps {
   placeholder?: string;
   required?: boolean;
   error?: null | string;
-  initialValue?: any;
+  initialValue?: string;
   onChange: (value: string) => void;
   type?: 'password';
 }

@@ -8,6 +8,7 @@ import React, {
 import { Portal, PortalHost } from '@gorhom/portal';
 import BottomSheet, {
   BottomSheetBackdrop,
+  BottomSheetBackdropProps,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
 import CreateIconInActive from '../../common/assets/icon/add.png';
@@ -48,7 +49,7 @@ export const Create: FunctionComponent = () => {
   }, []);
 
   const renderBackdrop = React.useCallback(
-    (props: any) => (
+    (props: BottomSheetBackdropProps) => (
       <BottomSheetBackdrop
         {...props}
         disappearsOnIndex={-1}
